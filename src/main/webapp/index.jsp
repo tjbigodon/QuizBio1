@@ -1,6 +1,6 @@
 <%-- 
     Document   : index
-    Created on : 19/04/2017, 21:39:17
+    Created on : 17/062017, 21:39:17
     Author     : Tarcisio & Jehymison
 --%>
 
@@ -17,7 +17,7 @@
 
 <center>
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="align-content: center">
-        <img src="resources/img/botanica/cropped-folha.png" width="300">
+        <img src="resources/img/botanica/cropped-folha.png" width="100">
     </div>
     <div class="row"></div>
     <br><br><br>
@@ -29,4 +29,4 @@
 </center>
 <tag:close_coluna/>
 <tag:conteudoFim />
-<tag:footerHome ano="2017" versao="1.0" caminho="resources" desenvolvedores="Alunos do 5º período do curso de Tecnologia em Análise e Desenvolvimento de Sistemas, do Instituto Federal Goiano - Campus Urutaí."/>
+<tag:footerHome ano="2017" versao="1.0" caminho="resources" desenvolvedores="Naiane Maria de Sousa e Tarcísio Ribeiro Junior"/>
