@@ -15,7 +15,6 @@
 <tag:conteudoInicio />
 <tag:open_coluna tamanho="12"/>
 
-
 <center>
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="align-content: center">
         <img src="resources/img/botanica/cropped-folha.png" width="100">
