@@ -10,7 +10,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
-<tag:headerHome_inicio title="BioQuiz - Login" titlePage="BioQuiz Web | Login" caminho="resources"/>
+<tag:header_inicio title="BioQuiz - Login" titlePage="BioQuiz Web | Login" caminho="resources"/>
 
 <tag:conteudoInicio />
 <tag:open_coluna tamanho="12"/>
@@ -73,5 +73,5 @@
 </center>
 <tag:close_coluna/>
 <tag:conteudoFim />
-<tag:footerHome ano="2017" versao="1.0" caminho="resources"
+<tag:footer ano="2017" versao="1.0" caminho="resources"
                 desenvolvedores="Diego Fonseca Pereira, Jehymison Gil A. Oliveira, Naiane Maria de Sousa e Tarcísio Ribeiro Junior"/>

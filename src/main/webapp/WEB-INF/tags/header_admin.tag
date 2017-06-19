@@ -35,11 +35,13 @@
 
             <!--BEGIN TOPBAR-->
             <div id="header-topbar-option-demo" class="page-header-topbar">
-                <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
-                    <div class="topbar-main" style="align-content: center; font-size: 20pt; color: white">
-                        <center>
-                            BioQuiz do Primeiro Grupo
-                        </center>
+                <nav id="topbar" role="navigation" style="margin-bottom: 0" data-step="3" class="navbar navbar-default navbar-static-top">
+                    <div class="topbar-main" style="background-color: #633d63">
+                        <a class="navbar-brand" href="#" style="padding: 8px">
+                            <img alt="Brand" src="../resources/img/botanica/cropped-folha.png"
+                                 style="width: 30px;height: 35px">
+                        </a>
+                        <p class="navbar-text navbar-right" style="color: white; margin-right: 10px">Administração</p>
                     </div>
                 </nav>
             </div>
