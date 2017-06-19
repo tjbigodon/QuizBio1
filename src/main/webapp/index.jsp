@@ -33,21 +33,18 @@
                 <form action="#" class="form-horizontal">
                     <div class="form-body pal">
                         <div class="form-group">
-                            <label for="inputName" class="col-md-3 control-label">
-                                Usuário: </label>
-                            <div class="col-md-6">
+                            
+                            <div class="col-md-12">
                                 <div class="input-icon right">
                                     <i class="fa fa-user"></i>
-                                    <input id="inputName" name="usuario" placeholder="Nome de Usuário" class="form-control" type="text"></div>
+                                    <input name="usuario" placeholder="Nome de Usuário" class="form-control" type="text"></div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword" class="col-md-3 control-label">
-                                Senha: </label>
-                            <div class="col-md-6" style="text-align: right">
+                            <div class="col-md-12" style="text-align: right">
                                 <div class="input-icon right">
                                     <i class="fa fa-lock"></i>
-                                    <input id="inputPassword" name="senha" placeholder="Senha" class="form-control" type="password"></div>
+                                    <input name="senha" placeholder="Senha" class="form-control" type="password"></div>
                                     <span class="help-block mbn"><a href="cadastro.jsp"><strong>Cadastre-se!</strong></a></span>
                             </div>
                         </div>
