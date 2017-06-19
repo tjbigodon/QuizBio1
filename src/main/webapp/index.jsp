@@ -76,4 +76,5 @@
 </center>
 <tag:close_coluna/>
 <tag:conteudoFim />
-<tag:footerHome ano="2017" versao="1.0" caminho="resources" desenvolvedores="Diego Fonseca Pereira, Jehymison Gil A. Oliveira, Naiane Maria de Sousa e Tarcísio Ribeiro Junior"/>
+<tag:footerHome ano="2017" versao="1.0" caminho="resources"
+                desenvolvedores="Diego Fonseca Pereira, Jehymison Gil A. Oliveira, Naiane Maria de Sousa e Tarcísio Ribeiro Junior"/>

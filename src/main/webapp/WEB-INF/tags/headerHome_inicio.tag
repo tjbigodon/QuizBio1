@@ -45,9 +45,9 @@
             </div>
             <!--END TOPBAR-->
 
-            <div id="conteiner">
+            <div id="container">
                 <!--BEGIN PAGE WRAPPER-->
-                <div id="page-conteiner">
+                <div id="page-container">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
