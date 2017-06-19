@@ -44,7 +44,6 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
   line-height: 1.42857143;
-  color: #999999;
   background-color: #f0f2f5;
   height: 100%;
 }
@@ -1187,7 +1186,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f7', end
   width: 100%;
   bottom: 0px;
   padding: 15px 20px;
-  background: #FFFFFF;
+  background: #D8D8D8;
 }
 #theme-setting {
   position: fixed;
