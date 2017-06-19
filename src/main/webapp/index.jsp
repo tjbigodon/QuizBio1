@@ -24,12 +24,7 @@
     
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="align-content: center">
         <h2>Bem vindo(a)!</h2><br><br>
-        <div class="col-lg-3">            
-        </div>
-        <div class="col-lg-6">
-        </div>
-        <div class="col-lg-3">            
-        </div>
+        
     </div>
 </center>
 <tag:close_coluna/>
