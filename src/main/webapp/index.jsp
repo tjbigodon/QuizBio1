@@ -4,9 +4,9 @@
     Author     : Tarcisio & Jehymison
 --%>
 
-<%if(session.getAttribute("nomeUsuario")!=null){
-    response.sendRedirect("logado.jsp");
-}%>
+<%if (session.getAttribute("nomeUsuario") != null) {
+        response.sendRedirect("logado.jsp");
+    }%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
@@ -20,11 +20,58 @@
         <img src="resources/img/botanica/cropped-folha.png" width="100">
     </div>
     <div class="row"></div>
-    <br><br><br>
-    
+    <br>
+
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="align-content: center">
         <h2>Bem vindo(a)!</h2><br><br>
-        
+
+        <div class="col-lg-3 col-md-3 col-sm-0"></div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+
+            <div class="panel-body pan">
+                <form action="#" class="form-horizontal">
+                    <div class="form-body pal">
+                        <div class="form-group">
+                            <label for="inputName" class="col-md-3 control-label">
+                                Nome: </label>
+                            <div class="col-md-6">
+                                <div class="input-icon right">
+                                    <i class="fa fa-user"></i>
+                                    <input id="inputName" placeholder="" class="form-control" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-md-3 control-label">
+                                Senha: </label>
+                            <div class="col-md-6" style="text-align: right">
+                                <div class="input-icon right">
+                                    <i class="fa fa-lock"></i>
+                                    <input id="inputPassword" placeholder="" class="form-control" type="text"></div>
+                                    <span class="help-block mbn"><a href="cadastro.jsp"><strong>Cadastre-se!</strong></a></span>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center" class="col-lg-12 col-md-6 col-sm-0">
+                            <hr style="border-top-color: #cbcdcf"/>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-actions pal" style="background-color: #f0f2f5">
+                        <div class="form-group mbn" style="text-align: right; padding: 0; margin: 0">
+                            <div class="col-md-offset-3 col-md-6">
+                                <button type="submit" class="btn btn-primary">
+                                    Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-0"></div>
     </div>
 </center>
 <tag:close_coluna/>
