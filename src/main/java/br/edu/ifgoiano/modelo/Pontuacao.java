@@ -11,7 +11,7 @@ package br.edu.ifgoiano.modelo;
  */
 public class Pontuacao {
     private int id;
-    private int id_usuario;
+    private Usuario id_usuario;
     private int pontos;
 
     public int getId() {
@@ -22,11 +22,11 @@ public class Pontuacao {
         this.id = id;
     }
 
-    public int getId_usuario() {
+    public Usuario getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_usuario(int id_usuario) {
+    public void setId_usuario(Usuario id_usuario) {
         this.id_usuario = id_usuario;
     }
 

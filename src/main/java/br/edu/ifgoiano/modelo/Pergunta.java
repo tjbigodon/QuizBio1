@@ -12,7 +12,7 @@ package br.edu.ifgoiano.modelo;
 public class Pergunta {
     private int id;
     private String pergunta;
-    private int resposta_certa;
+    private Resposta resposta_certa;
 
     public int getId() {
         return id;
@@ -30,13 +30,12 @@ public class Pergunta {
         this.pergunta = pergunta;
     }
 
-    public int getResposta_certa() {
+    public Resposta getResposta_certa() {
         return resposta_certa;
     }
 
-    public void setResposta_certa(int resposta_certa) {
+    public void setResposta_certa(Resposta resposta_certa) {
         this.resposta_certa = resposta_certa;
-    }
-    
+    } 
     
 }

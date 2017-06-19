@@ -11,7 +11,7 @@ package br.edu.ifgoiano.modelo;
  */
 public class Resposta {
     private int id;
-    private int id_pergunta;
+    private Pergunta id_pergunta;
     private String resposta;
 
     public int getId() {
@@ -22,11 +22,11 @@ public class Resposta {
         this.id = id;
     }
 
-    public int getId_pergunta() {
+    public Pergunta getId_pergunta() {
         return id_pergunta;
     }
 
-    public void setId_pergunta(int id_pergunta) {
+    public void setId_pergunta(Pergunta id_pergunta) {
         this.id_pergunta = id_pergunta;
     }
 
