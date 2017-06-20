@@ -22,7 +22,6 @@
     PerguntaDao questao = new PerguntaDao();
     RespostaDao resposta = new RespostaDao();
     List<Pergunta> lista_questao = questao.getLista();
-    List<Resposta> lista_resposta = resposta.listarPergunta();
 %>
 
 <!-- Tabela de RUD -->
@@ -39,7 +38,7 @@
     </form>
     <%} else {%>
     <div class="panel panel-grey">
-        <div class="panel-heading">Propostas Submetidas</div>
+        <div class="panel-heading">Questões Cadastradas</div>
         <div class="panel-body">
             <form action="../QuestoesServlet" method="POST">
                 <table class="table table-hover table-hover-color table-condensed">
@@ -76,7 +75,6 @@
                                 </div>
                             </td>
                         </tr>                
-                    <strong>Obs.:Marque somente a resposta correta.</strong>
                     <%}%>
                     </tbody>
                 </table>

@@ -1,6 +1,11 @@
+<%@tag import="br.edu.ifgoiano.modelo.Usuario"%>
 <%@attribute name="title" required="true" %>
 <%@attribute name="titlePage" required="true" %>
 <%@attribute name="caminho" required="true"%>
+
+<%
+    Usuario usuarioLogado = (Usuario) session.getAttribute("user_logado");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -37,11 +42,12 @@
             <div id="header-topbar-option-demo" class="page-header-topbar">
                 <nav id="topbar" role="navigation" style="margin-bottom: 0" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="topbar-main" style="background-color: #633d63">
-                        <a class="navbar-brand" href="#" style="padding: 8px">
+                        <a class="navbar-brand" href="../admin/" style="padding: 8px">
                             <img alt="Brand" src="../resources/img/botanica/cropped-folha.png"
                                  style="width: 30px;height: 35px">
                         </a>
-                        <p class="navbar-text navbar-right" style="color: white; margin-right: 10px">Administração</p>
+                        <p class="navbar-text navbar-left" style="color: white; margin-left: 10px; font-size: 14px"><strong>BotaniQuiz</strong></p>
+                        <p class="navbar-text navbar-right" style="color: white; margin-right: 10px">Seja bem vindo, <%= usuarioLogado.getNome() + " " + usuarioLogado.getSobrenome()%>!</p>
                     </div>
                 </nav>
             </div>

@@ -1,3 +1,4 @@
+<%@tag import="br.edu.ifgoiano.modelo.Usuario"%>
 <%@attribute name="title" required="true" %>
 <%@attribute name="titlePage" required="true" %>
 <%@attribute name="caminho" required="true"%>
@@ -38,7 +39,7 @@
                 <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="topbar-main" style="align-content: center; font-size: 20pt; color: white">
                         <center>
-                            BioQuiz do Primeiro Grupo
+                            BotaniQuiz
                         </center>
                     </div>
                 </nav>

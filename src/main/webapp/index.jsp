@@ -16,11 +16,19 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
-<tag:header_inicio title="BioQuiz - Login" titlePage="BioQuiz Web | Login" caminho="resources"/>
+<tag:header_inicio title="BotaniQuiz - Login" titlePage="BotaniQuiz | Login" caminho="resources"/>
 
 <tag:conteudoInicio />
-<%if (session.getAttribute("erro_login") != null) {%>
-<% if (session.getAttribute("erro_login").equals("nao_existe")) {%>
+<%if (session.getAttribute("erro_login") != null) {
+if (session.getAttribute("erro_login").equals("deslogado")) {%>
+<div id="alert" class="alert alert-success col-lg-12" role="alert" style="text-align: center">
+    <strong>Você saiu da sessão com sucesso.</strong>
+    <%
+        session.setAttribute("erro_login", null);
+    %>
+</div>
+  
+<%}else if (session.getAttribute("erro_login").equals("nao_existe")) {%>
 <div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
     <strong>Usuário não cadastrado! Faça seu cadastro clicando <a href="cadastro.jsp">aqui!</a></strong>
     <%session.setAttribute("erro_login", null);%>

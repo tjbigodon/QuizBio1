@@ -5,17 +5,17 @@
 --%>
 
 <%@page import="br.edu.ifgoiano.modelo.Usuario"%>
-<%if(session.getAttribute("user_logado")==null){
-    response.sendRedirect("../index.jsp");
-}else{
-    Usuario usr = (Usuario)session.getAttribute("user_logado");
-    if(usr.getTipo()==1){
+<%if (session.getAttribute("user_logado") == null) {
         response.sendRedirect("../index.jsp");
-    }
-}%>
+    } else {
+        Usuario usr = (Usuario) session.getAttribute("user_logado");
+        if (usr.getTipo() == 1) {
+            response.sendRedirect("../index.jsp");
+        }
+    }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
-<tag:header_user title="BioQuiz - Início" titlePage="BioQuiz Web | Início" caminho="../resources"/>
+<tag:header_user title="BioQuiz - Início" titlePage="BotaniQuiz | Início" caminho="../resources"/>
 
 <tag:conteudoInicio />
 <tag:open_coluna tamanho="12"/>
@@ -64,24 +64,26 @@
     </div>
     <div class="hidden-sm col-md-1"></div>
     <div class="col-sm-4 col-md-3">
-        <div class="panel profit db mbm">
-            <div class="panel-body">
-                <p class="icon">
-                    <i class="icon fa fa-eject" style="color: #333"></i>
-                </p>
-                <h4 class="value">
-                    <span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0">
-                    </span>
-                    <span>
-                        Sair
-                    </span>
-                </h4>
-                <br>
-                <p class="description">
-                    Sai do BioQuiz.
-                </p>
+        <a href="../SegurancaServlet" style="color: black">
+            <div class="panel profit db mbm">
+                <div class="panel-body">
+                    <p class="icon">
+                        <i class="icon fa fa-eject" style="color: #333"></i>
+                    </p>
+                    <h4 class="value">
+                        <span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0">
+                        </span>
+                        <span>
+                            Sair
+                        </span>
+                    </h4>
+                    <br>
+                    <p class="description">
+                        Sai do BioQuiz.
+                    </p>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 <!-- Fim do Menu -->
