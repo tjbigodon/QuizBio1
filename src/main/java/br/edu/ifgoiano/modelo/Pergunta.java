@@ -6,7 +6,6 @@
 package br.edu.ifgoiano.modelo;
 
 import java.util.List;
-import javax.jws.WebService;
 
 /**
  *
@@ -15,7 +14,7 @@ import javax.jws.WebService;
 public class Pergunta {
     private int id;
     private String questao, titulo;
-    private List<Resposta> resposta_certa;
+    private Resposta[] resposta_certa = new Resposta[5];
 
     public int getId() {
         return id;
@@ -41,13 +40,12 @@ public class Pergunta {
         this.titulo = titulo;
     }
 
-    public List<Resposta> getResposta() {
+    public Resposta[] getResposta_certa() {
         return resposta_certa;
     }
 
-    public void setResposta(List<Resposta> resposta_certa) {
+    public void setResposta_certa(Resposta[] resposta_certa) {
         this.resposta_certa = resposta_certa;
     }
-    
     
 }

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,75 +22,88 @@ import java.util.logging.Logger;
  * @author Naiane
  */
 public class PerguntaDao {
+
     Connection connection;
 
     public PerguntaDao() {
         this.connection = new ConnectionFactory().getConnection();
     }
-    
-    public boolean cadastrar(Pergunta pergunta){
-        String sql = "INSERT INTO questao(pergunta,resp_quest) VALUES (?,?);";
-        
+
+    public int cadastrar(Pergunta pergunta) {
+        String sql = "INSERT INTO questao(pergunta,titulo) VALUES (?,?);";
+
         PreparedStatement stmt;
         try {
-            stmt = connection.prepareStatement(sql);
+            stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, pergunta.getQuestao());
-            stmt.setObject(2, pergunta.getResposta());
-            
+            stmt.setString(2, pergunta.getTitulo());
+
             stmt.execute();
+
+            ResultSet retornoID = stmt.getGeneratedKeys();
+
+            int id = -1;
+            
+            if (retornoID.next()) {
+                id = retornoID.getInt(1);
+            } else {
+                // throw an exception from here
+            }
+            
             stmt.close();
-                        
-            return true;
+
+            return id;
         } catch (SQLException ex) {
             Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return 0;
         }
     }
-    
-    public boolean atualizar(Pergunta pergunta){
+
+    public boolean atualizar(Pergunta pergunta) {
         String sql = "UPDATE questao SET pergunta=?, resp_quest=? WHERE id=?;";
-        
+
         PreparedStatement stmt;
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, pergunta.getQuestao());
-            stmt.setObject(2, pergunta.getResposta().get(pergunta.getId()).getId());
+            stmt.setObject(2, pergunta.getResposta_certa());
             stmt.setInt(3, pergunta.getId());
-            
+
             stmt.execute();
             stmt.close();
-                        
+
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
-        
-    public boolean deletar(Pergunta pergunta){
-        String sql = "DELETE FROM questao WHERE id=?;";
-        
+
+    public boolean deletar(int id) {
+        String sql = "DELETE FROM questao WHERE id LIKE ?;";
+
         PreparedStatement stmt;
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, pergunta.getId());
-            
+            stmt.setInt(1, id);
+
             stmt.execute();
             stmt.close();
-                        
+
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
-    
+
     /**
      * Pesquisa de dados na tabela Questao
+     *
      * @return
      */
     public List<Pergunta> getLista() {
-        String sql = "SELECT * FROM pergunta";
+        String sql = "SELECT * FROM questao";
 
         try {
             List<Pergunta> questao_retorno = new ArrayList();
@@ -98,14 +112,15 @@ public class PerguntaDao {
 
             while (rs.next()) {
                 Pergunta nQuest = new Pergunta();
-                
+                RespostaDao resposta = new RespostaDao();
+                List<Resposta> list_reposta = resposta.listarPergunta();
+
                 nQuest.setTitulo(rs.getString("titulo"));
                 nQuest.setId(rs.getInt("id"));
                 nQuest.setQuestao(rs.getString("pergunta"));
-                nQuest.setResposta((List<Resposta>) rs.getObject("resp_quest"));
-                
+
                 questao_retorno.add(nQuest);
-                
+
             }
             rs.close();
             stmt.close();

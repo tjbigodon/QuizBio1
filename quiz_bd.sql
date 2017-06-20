@@ -21,16 +21,14 @@ FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 CREATE TABLE questao(
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 caminho TEXT DEFAULT NULL,
+titulo TEXT NOT NULL,
 pergunta TEXT NOT NULL  
 );
 
 CREATE TABLE resposta(
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 resposta TEXT NOT NULL,
-certa INT(2) NOT NULL DEFAULT 0,
+certa BOOLEAN NOT NULL DEFAULT 0,
 id_pergunta INT NOT NULL,
 FOREIGN KEY (id_pergunta) REFERENCES questao(id)
 );
-
-ALTER TABLE questao ADD resp_quest INT NOT NULL;
-ALTER TABLE questao ADD CONSTRAINT resposta_pergunta FOREIGN KEY (resp_quest) REFERENCES resposta(id);

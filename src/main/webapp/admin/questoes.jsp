@@ -4,12 +4,11 @@
     Author     : Tarcisio & Jehymison
 --%>
 
+<%@page import="br.edu.ifgoiano.modelo.Resposta"%>
+<%@page import="br.edu.ifgoiano.persistencia.RespostaDao"%>
 <%@page import="br.edu.ifgoiano.modelo.Pergunta"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%if (session.getAttribute("nomeUsuario") != null) {
-        response.sendRedirect("logado.jsp");
-    }%>
 
 <%@page import="br.edu.ifgoiano.persistencia.PerguntaDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -21,7 +20,9 @@
 
 <%
     PerguntaDao questao = new PerguntaDao();
-    List<Pergunta> lista_questao = questao.getLista();;
+    RespostaDao resposta = new RespostaDao();
+    List<Pergunta> lista_questao = questao.getLista();
+    List<Resposta> lista_resposta = resposta.listarPergunta();
 %>
 
 <!-- Tabela de RUD -->
@@ -40,7 +41,7 @@
     <div class="panel panel-grey">
         <div class="panel-heading">Propostas Submetidas</div>
         <div class="panel-body">
-            <form action="#" method="POST">
+            <form action="../QuestoesServlet" method="POST">
                 <table class="table table-hover table-hover-color table-condensed">
                     <thead>
                         <tr>
@@ -52,27 +53,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% for (int i = 0; i < lista_questao.size(); i++) {%>
+                        <% for (int i = 0; i < lista_questao.size(); i++) {%>                        
                         <tr>
-                            <td class="hidden-xs hidden-sm"><%= i + 1%></td>
-                            <td class="hidden"><%= lista_questao.get(i).getId()%></td>
-                            <td><%= lista_questao.get(i).getTitulo()%></td>
-                            <td><%= lista_questao.get(i).getResposta().get(i).isCorreta() == true%></td>
-                            <td>
+                            <td class="hidden-xs hidden-sm" style="text-align: center"><%= i + 1%></td>
+                            <td class="hidden" style="text-align: center"><%= lista_questao.get(i).getId()%></td>
+                            <td style="text-align: center"><%= lista_questao.get(i).getTitulo()%></td>
+                            <td style="text-align: center"><%= resposta.pesquisarPerguntaCerta(lista_questao.get(i).getId()).getResposta() %></td>
+                            <td style="text-align: center">
                                 <div class="todo-actions" style="text-align: center">
-                                    <div class="col-lg-4 col-sm-2" style="text-align: right">
-                                        <button class="btn btn-square btn-xs" type="submit" style="background-color: rgba(255,255,255,0)"
-                                                value="download_<%= lista_questao.get(i).getId()%>" name="btn">  
-                                            <i class="fa fa-download" style="color: #007451"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-4 col-sm-2">
+                                    <div class="col-md-6 col-sm-12">
                                         <button class="btn btn-square btn-xs" type="submit" style="background-color: rgba(255,255,255,0)"
                                                 value="editar_<%= lista_questao.get(i).getId()%>" name="btn">  
                                             <i class="fa fa-edit" style="color: #444444"></i>
                                         </button>
                                     </div>
-                                    <div class="col-md-4 col-sm-2">
+                                    <div class="col-md-6 col-sm-12">
                                         <button class="btn btn-square btn-xs" type="submit" style="background-color: rgba(255,255,255,0)"
                                                 value="excluir_<%= lista_questao.get(i).getId()%>" name="btn">  
                                             <i class="fa fa-trash-o" style="color: red" ></i>
@@ -81,8 +76,8 @@
                                 </div>
                             </td>
                         </tr>                
-                                <strong>Obs.:Marque somente a resposta correta.</strong>
-                        <%}%>
+                    <strong>Obs.:Marque somente a resposta correta.</strong>
+                    <%}%>
                     </tbody>
                 </table>
                 <div class="col-lg-12">
@@ -103,14 +98,14 @@
         <div class="panel-heading">
             Cadastro de Questões</div>
         <div class="panel-body pan">
-            <form action="#" method="POST">
+            <form action="../QuestoesServlet" method="POST">
                 <div class="form-body pal">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="input-icon right">
                                     <i class="fa fa-ticket"></i>
-                                    <input type="text" placeholder="Título da Questão" class="form-control" />
+                                    <input type="text" placeholder="Título da Questão" class="form-control" name="tituloQuest"/>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +114,7 @@
                         <label for="inputMessage" class="control-label">
                             Pergunta
                         </label>
-                        <textarea rows="5" class="form-control"></textarea>
+                        <textarea rows="5" class="form-control" name="questTexto"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="inputSubject" class="control-label">
@@ -128,29 +123,36 @@
                             <div class="input-group" style="margin: 5px">
                                 <span class="input-group-addon">
                                     A)
-                                    <input type="checkbox" name="check_a"/></span>
+                                    <input type="radio" name="check" value="0"/></span>
                                 <input type="text" placeholder="" class="form-control" name="resposta_a" />
                             </div>
 
                             <div class="input-group" style="margin: 5px">
                                 <span class="input-group-addon">
                                     B)
-                                    <input type="checkbox" name="check_b"/></span>
+                                    <input type="radio" name="check" value="1"/></span>
                                 <input type="text" placeholder="" class="form-control" name="resposta_b" />
                             </div>
 
                             <div class="input-group" style="margin: 5px">
                                 <span class="input-group-addon">
                                     C)
-                                    <input type="checkbox" name="check_c"/></span>
+                                    <input type="radio" name="check" value="2"/></span>
                                 <input type="text" placeholder="" class="form-control" name="resposta_c" />
                             </div>
 
                             <div class="input-group" style="margin: 5px">
                                 <span class="input-group-addon">
                                     D)
-                                    <input type="checkbox" name="check_d"/></span>
+                                    <input type="radio" name="check" value="3"/></span>
                                 <input type="text" placeholder="" class="form-control" name="resposta_d" />
+                            </div>
+
+                            <div class="input-group" style="margin: 5px">
+                                <span class="input-group-addon">
+                                    E)
+                                    <input type="radio" name="check" value="4"/></span>
+                                <input type="text" placeholder="" class="form-control" name="resposta_e" />
                             </div>
                             <div class="small" style="text-align: right">
                                 Obs.:Marque somente a resposta correta.

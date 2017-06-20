@@ -21,7 +21,7 @@
         <div class="panel profit db mbm">
             <div class="panel-body">
                 <p class="icon">
-                    <i class="icon fa fa-plus-square-o" style="color: #333"></i>
+                    <i class="icon fa fa-leaf" style="color: #333"></i>
                 </p>
                 <h4 class="value">
                     <span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0">

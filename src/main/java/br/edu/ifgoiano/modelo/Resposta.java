@@ -5,18 +5,21 @@
  */
 package br.edu.ifgoiano.modelo;
 
-import javax.jws.WebService;
-
 /**
  *
  * @author Naiane
  */
 public class Resposta {
     private int id;
-    private Pergunta id_pergunta;
+    private int id_pergunta;
     private String resposta;
     private boolean correta;
 
+    public Resposta(String resposta, boolean correta) {
+        this.resposta = resposta;
+        this.correta = correta;
+    }
+    
     public Resposta() {
         this.correta = false;
     }
@@ -29,11 +32,11 @@ public class Resposta {
         this.id = id;
     }
 
-    public Pergunta getId_pergunta() {
+    public int getId_pergunta() {
         return id_pergunta;
     }
 
-    public void setId_pergunta(Pergunta id_pergunta) {
+    public void setId_pergunta(int id_pergunta) {
         this.id_pergunta = id_pergunta;
     }
 
