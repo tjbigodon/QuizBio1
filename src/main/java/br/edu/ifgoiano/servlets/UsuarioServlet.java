@@ -8,7 +8,6 @@ package br.edu.ifgoiano.servlets;
 import br.edu.ifgoiano.modelo.Usuario;
 import br.edu.ifgoiano.persistencia.UsuarioDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tarcisio
  */
-@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
+@WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
 public class UsuarioServlet extends HttpServlet {
 
     /**
@@ -36,14 +35,14 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String tipo_btn = request.getParameter("btn");
-        
-        if(tipo_btn.equalsIgnoreCase("cadastrar")){
-            if(cadastrarUsu(request, response)){
+
+        if (tipo_btn.equalsIgnoreCase("cadastrar")) {
+            if (cadastrarUsu(request, response)) {
                 System.out.println("Cadastro Realizado");
                 out.println("<br><p>Cadastrado Usuário</p>");
-            }else{
+            } else {
                 System.out.println("Não Cadastrado");
                 out.println("<br><p>Não foi possível cadastrar o Usuário</p>");
             }
@@ -91,26 +90,26 @@ public class UsuarioServlet extends HttpServlet {
 
     public static boolean cadastrarUsu(HttpServletRequest request, HttpServletResponse response) {
         Usuario usuario = new Usuario();
-        
-        usuario.setNome(request.getParameter("nomeUsu") + " " + request.getParameter("sobrenomeUsu"));
-        usuario.setNick(request.getParameter("nickUsu"));
-        usuario.setSenha(request.getParameter("senhaUsu"));
-        usuario.setEmail(request.getParameter("emailUsu"));
-        usuario.setTipo(0);
-        
-        if (request.getParameter("senhaUsu").equals(request.getParameter("confSenhaUsu"))) {
+
+        if (request.getParameter("senhaUsu").equals(request.getParameter("confSenhaUsu")) &&
+                !request.getParameter("senhaUsu").isEmpty()) {
+            usuario.setNome(request.getParameter("nomeUsu") + " " + request.getParameter("sobrenomeUsu"));
+            usuario.setNick(request.getParameter("nickUsu"));
+            usuario.setSenha(request.getParameter("senhaUsu"));
+            usuario.setEmail(request.getParameter("emailUsu"));
+            usuario.setTipo(0);
             UsuarioDao usu = new UsuarioDao();
-            
-            if(usu.cadastrar(usuario)){
+
+            if (usu.cadastrar(usuario)) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-            
-        }else{
+
+        } else {
             System.out.println("Senhas diferentes");
             return false;
         }
     }
-    
+
 }
