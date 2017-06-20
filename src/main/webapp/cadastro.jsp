@@ -13,6 +13,36 @@
 <tag:header_inicio title="BioQuiz - Cadastro" titlePage="BioQuiz Web | Cadastro" caminho="resources"/>
 
 <tag:conteudoInicio />
+<%if (session.getAttribute("erro_cadastro") != null) {%>
+<%if (session.getAttribute("erro_cadastro").equals("false")) {%>
+<div id="alert" class="alert alert-success col-lg-12" role="alert" style="text-align: center">
+    <strong>Cadastro efetuado com sucesso!</strong>
+    <%
+        session.setAttribute("erro_cadastro", null);
+    %>
+</div>
+<%} else if (session.getAttribute("erro_cadastro").equals("bd")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Erro no banco de dados! Entre em contato com os administradores.</strong>
+    <%session.setAttribute("erro_cadastro", null);%>
+</div>
+<%} else if (session.getAttribute("erro_cadastro").equals("senha_dif")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>As senhas digitadas não conferem!</strong>
+    <%session.setAttribute("erro_cadastro", null);%>
+</div>
+<%} else if (session.getAttribute("erro_cadastro").equals("email_inv")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Digite um e-mail válido!</strong>
+    <%session.setAttribute("erro_cadastro", null);%>
+</div>
+<%} else {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Preencha todos os campos!</strong>
+    <%session.setAttribute("erro_cadastro", null);%>
+</div>
+<%}%>
+<%}%>
 <tag:open_coluna tamanho="12"/>
 
 <center>
@@ -81,4 +111,4 @@
 <tag:close_coluna/>
 <tag:conteudoFim />
 <tag:footer ano="2017" versao="1.0" caminho="resources"
-                desenvolvedores="Diego Fonseca Pereira, Jehymison Gil A. Oliveira, Naiane Maria de Sousa e Tarcísio Ribeiro Junior"/>
+            desenvolvedores="Diego Fonseca Pereira, Jehymison Gil A. Oliveira, Naiane Maria de Sousa e Tarcísio Ribeiro Junior"/>
