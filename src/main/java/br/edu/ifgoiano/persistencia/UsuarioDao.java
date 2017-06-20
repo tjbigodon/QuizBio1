@@ -44,7 +44,9 @@ public class UsuarioDao {
             user.setNick(rs.getString("username"));
             user.setSenha(rs.getString("senha"));
             user.setNome(nomes[0].trim());
+            System.out.println(user.getNome());
             user.setSobrenome(nomes[1].trim());
+            System.out.println(user.getSobrenome());
             user.setTipo(rs.getInt("tipo"));
             
             rs.close();

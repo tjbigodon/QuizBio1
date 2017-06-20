@@ -75,8 +75,6 @@ public class UsuarioServlet extends HttpServlet {
                 String senhaCrip = Criptografia.criptografar(request.getParameter("senha"));
                 int opLogin = ValidacaoLogin.validaLogin(username, senhaCrip);
 
-                System.out.println(opLogin);
-
                 if (opLogin == -1) {
                     session.setAttribute("user_logado", new UsuarioDao().buscarPorNick(username));
                     session.setAttribute("erro_login", null);

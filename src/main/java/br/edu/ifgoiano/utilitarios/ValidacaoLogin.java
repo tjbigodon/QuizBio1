@@ -22,7 +22,7 @@ public class ValidacaoLogin {
         if(user==null){
             return 1;
         }else{
-            if(!username.equals(user.getNick())||!senhaCrip.equals(user.getSenha())){
+            if(!username.equals(user.getNick())||!senhaCrip.equalsIgnoreCase(user.getSenha())){
                 return 2;
             } else if(user.getTipo()==0){
                 return 0;
