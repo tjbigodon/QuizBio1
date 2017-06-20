@@ -5,14 +5,17 @@
  */
 package br.edu.ifgoiano.modelo;
 
+import java.util.List;
+import javax.jws.WebService;
+
 /**
  *
  * @author Naiane
  */
 public class Pergunta {
     private int id;
-    private String pergunta;
-    private Resposta resposta_certa;
+    private String questao, titulo;
+    private List<Resposta> resposta_certa;
 
     public int getId() {
         return id;
@@ -22,20 +25,29 @@ public class Pergunta {
         this.id = id;
     }
 
-    public String getPergunta() {
-        return pergunta;
+    public String getQuestao() {
+        return questao;
     }
 
-    public void setPergunta(String pergunta) {
-        this.pergunta = pergunta;
+    public void setQuestao(String questao) {
+        this.questao = questao;
     }
 
-    public Resposta getResposta_certa() {
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public List<Resposta> getResposta() {
         return resposta_certa;
     }
 
-    public void setResposta_certa(Resposta resposta_certa) {
+    public void setResposta(List<Resposta> resposta_certa) {
         this.resposta_certa = resposta_certa;
-    } 
+    }
+    
     
 }

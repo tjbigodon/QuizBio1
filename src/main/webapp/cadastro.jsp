@@ -27,37 +27,37 @@
         <div class="col-lg-3">            
         </div>
         <div class="col-lg-6">
-            <form action="#">
+            <form action="UsuarioServlet" method="POST">
                 <div class="form-body pal">
                     <div class="form-group">
                         <div class="input-icon right">
                             <i class="fa fa-user"></i>
-                            <input id="inputName" placeholder="Nome de Usuário" class="form-control" type="text"></div>
+                            <input name="nickUsu" placeholder="Nome de Usuário" class="form-control" type="text"></div>
                     </div>
                     <div class="form-group">
                         <div class="input-icon right">
                             <i class="fa fa-envelope"></i>
-                            <input id="inputEmail" placeholder="Email" class="form-control" type="text"></div>
+                            <input name="emailUsu" placeholder="Email" class="form-control" type="text"></div>
                     </div>
                     <div class="form-group">
                         <div class="input-icon right">
                             <i class="fa fa-lock"></i>
-                            <input id="inputPassword" placeholder="Senha" class="form-control" type="password"></div>
+                            <input name="senhaUsu" placeholder="Senha" class="form-control" type="password"></div>
                     </div>
                     <div class="form-group">
                         <div class="input-icon right">
                             <i class="fa fa-lock"></i>
-                            <input id="inputConfirmPassword" placeholder="Confirme a senha" class="form-control" type="password"></div>
+                            <input name="confSenhaUsu" placeholder="Confirme a senha" class="form-control" type="password"></div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="inputFirstName" placeholder="Primeiro Nome" class="form-control" type="text"></div>
+                                <input name="nomeUsu" placeholder="Primeiro Nome" class="form-control" type="text"></div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="inputLastName" placeholder="Último Nome" class="form-control" type="text"></div>
+                                <input name="sobrenomeUsu" placeholder="Último Nome" class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-12 col-sm-0">
@@ -68,8 +68,7 @@
                     </div>
                 </div>                    
                 <div class="form-actions text-right pal" style="background-color: #f0f2f5">
-                    <button type="Cadastrar" class="btn btn-primary">
-                        Cadastrar</button>
+                    <input type="submit" class="btn btn-primary" name="btn" value="Cadastrar" />                        
                 </div>
             </form>
         </div>

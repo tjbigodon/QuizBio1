@@ -24,7 +24,7 @@ public class UsuarioDao {
     }
     
     public boolean cadastrar(Usuario usuario){
-        String sql = "INSERT INTO usuario(nome,email,senha) VALUES (?,?,?);";
+        String sql = "INSERT INTO usuario(nome,email,senha, username) VALUES (?,?,?,?);";
         
         PreparedStatement stmt;
         try {
@@ -32,6 +32,7 @@ public class UsuarioDao {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
+            stmt.setString(4, usuario.getNick());
             
             stmt.execute();
             stmt.close();

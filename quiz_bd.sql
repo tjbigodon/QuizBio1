@@ -4,9 +4,11 @@ use quiz_bd;
 
 CREATE TABLE usuario(
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-nome VARCHAR(50) NOT NULL,
+username VARCHAR(30) NOT NULL,
+nome VARCHAR(80) NOT NULL,
 email TEXT NOT NULL,
-senha TEXT NOT NULL
+senha TEXT NOT NULL,
+tipo BIT DEFAULT 0
 );
 
 CREATE TABLE pontuacao(
@@ -16,18 +18,19 @@ pontos INT,
 FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
 
-CREATE TABLE pergunta(
+CREATE TABLE questao(
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-caminho TEXT,
+caminho TEXT DEFAULT NULL,
 pergunta TEXT NOT NULL  
 );
 
 CREATE TABLE resposta(
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 resposta TEXT NOT NULL,
+certa BIT NOT NULL DEFAULT 0,
 id_pergunta INT NOT NULL,
-FOREIGN KEY (id_pergunta) REFERENCES pergunta(id)
+FOREIGN KEY (id_pergunta) REFERENCES questao(id)
 );
 
-ALTER TABLE pergunta ADD resp_certa INT NOT NULL;
-ALTER TABLE pergunta ADD CONSTRAINT resposta_pergunta FOREIGN KEY (resp_certa) REFERENCES resposta(id);
+ALTER TABLE questao ADD resp_quest INT NOT NULL;
+ALTER TABLE questao ADD CONSTRAINT resposta_pergunta FOREIGN KEY (resp_quest) REFERENCES resposta(id);

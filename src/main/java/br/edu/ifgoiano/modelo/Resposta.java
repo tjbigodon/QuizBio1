@@ -5,6 +5,8 @@
  */
 package br.edu.ifgoiano.modelo;
 
+import javax.jws.WebService;
+
 /**
  *
  * @author Naiane
@@ -13,6 +15,11 @@ public class Resposta {
     private int id;
     private Pergunta id_pergunta;
     private String resposta;
+    private boolean correta;
+
+    public Resposta() {
+        this.correta = false;
+    }
 
     public int getId() {
         return id;
@@ -36,6 +43,14 @@ public class Resposta {
 
     public void setResposta(String resposta) {
         this.resposta = resposta;
+    }
+
+    public boolean isCorreta() {
+        return correta;
+    }
+
+    public void setCorreta(boolean correta) {
+        this.correta = correta;
     }
     
     

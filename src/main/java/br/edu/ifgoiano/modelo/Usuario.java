@@ -10,8 +10,8 @@ package br.edu.ifgoiano.modelo;
  * @author Naiane
  */
 public class Usuario {
-    private int id;
-    private String nome;
+    private int id, tipo;
+    private String nome, sobrenome, nick;
     private String email;
     private String senha;
 
@@ -45,6 +45,30 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
     
     
