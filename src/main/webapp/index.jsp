@@ -3,16 +3,40 @@
     Created on : 17/062017, 21:39:17
     Author     : Tarcisio & Jehymison
 --%>
-
-<%if (session.getAttribute("nomeUsuario") != null) {
-        response.sendRedirect("logado.jsp");
-    }%>
+<%@page import="br.edu.ifgoiano.modelo.Usuario"%>
+<%if(session.getAttribute("user_logado")!=null){
+    Usuario usr = (Usuario)session.getAttribute("user_logado");
+    
+    if(usr.getTipo()==0){
+        response.sendRedirect("user/index.jsp");
+    } else{
+        response.sendRedirect("admin/index.jsp");
+    }
+}%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
 <tag:header_inicio title="BioQuiz - Login" titlePage="BioQuiz Web | Login" caminho="resources"/>
 
 <tag:conteudoInicio />
+<%if (session.getAttribute("erro_login") != null) {%>
+<% if (session.getAttribute("erro_login").equals("nao_existe")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Usuário não cadastrado! Faça seu cadastro clicando <a href="cadastro.jsp">aqui!</a></strong>
+    <%session.setAttribute("erro_login", null);%>
+</div>
+<%} else if (session.getAttribute("erro_login").equals("incorreto")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Nome de usuário e/ou senha incorreto(s)!</strong>
+    <%session.setAttribute("erro_login", null);%>
+</div>
+<%} else if (session.getAttribute("erro_login").equals("vazio")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Preencha todos os campos!</strong>
+    <%session.setAttribute("erro_login", null);%>
+</div>
+<%}
+}%>
 <tag:open_coluna tamanho="12"/>
 
 <center>
@@ -30,7 +54,7 @@
         <div class="col-lg-6 col-md-6 col-sm-12">
 
             <div class="panel-body pan">
-                <form action="#" class="form-horizontal">
+                <form action="UsuarioServlet" method="post" class="form-horizontal">
                     <div class="form-body pal">
                         <div class="form-group">
                             
@@ -58,8 +82,7 @@
                     <div class="form-actions pal" style="background-color: #f0f2f5">
                         <div class="form-group mbn" style="text-align: right; padding: 0; margin: 0">
                             <div class="col-md-offset-3 col-md-6">
-                                <button type="submit" class="btn btn-primary">
-                                    Entrar</button>
+                                <input type="submit" name="btn" value="Entrar" class="btn btn-primary"/>
                             </div>
                         </div>
                     </div>

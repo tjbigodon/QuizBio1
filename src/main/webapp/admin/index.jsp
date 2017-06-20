@@ -4,10 +4,10 @@
     Author     : Tarcisio & Jehymison
 --%>
 
-<%if (session.getAttribute("nomeUsuario") != null) {
-        response.sendRedirect("logado.jsp");
-    }%>
-
+<%@page import="br.edu.ifgoiano.modelo.Usuario"%>
+<%if(session.getAttribute("user_logado")==null){
+    response.sendRedirect("../index.jsp");
+}%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
 <tag:header_admin title="BioQuiz - Administração" titlePage="BioQuiz Web | Administração" caminho="../resources"/>

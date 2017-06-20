@@ -8,6 +8,7 @@ package br.edu.ifgoiano.persistencia;
 import br.edu.ifgoiano.modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,39 @@ public class UsuarioDao {
 
     public UsuarioDao() {
         this.connection = new ConnectionFactory().getConnection();
+    }
+    
+    public Usuario buscarPorNick(String username){
+        String sql = "SELECT * FROM usuario WHERE username like ? ;";
+        
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            
+            rs.first();
+            
+            String nomeComp = rs.getString("nome");
+            String[] nomes = nomeComp.split("_|_\\s");
+            
+            Usuario user = new Usuario();
+            user.setId(rs.getInt("id"));
+            user.setEmail(rs.getString("email"));
+            user.setNick(rs.getString("username"));
+            user.setSenha(rs.getString("senha"));
+            user.setNome(nomes[0].trim());
+            user.setSobrenome(nomes[1].trim());
+            user.setTipo(rs.getInt("tipo"));
+            
+            rs.close();
+            stmt.close();
+                        
+            return user;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
     public boolean cadastrar(Usuario usuario){
