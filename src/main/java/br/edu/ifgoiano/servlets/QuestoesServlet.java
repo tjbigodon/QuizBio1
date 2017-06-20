@@ -10,11 +10,14 @@ import br.edu.ifgoiano.modelo.Resposta;
 import br.edu.ifgoiano.persistencia.PerguntaDao;
 import br.edu.ifgoiano.persistencia.RespostaDao;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,11 +40,13 @@ public class QuestoesServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
+        HttpSession session = request.getSession();
+
         if (request.getParameter("btn").equalsIgnoreCase("cadastrar")) {
             if (cadastroQuest(request, response)) {
-                System.out.println("Mensagem de Sucesso");
+                session.setAttribute("erro_cadastro_quest", "false");
             } else {
-                System.out.println("Mensagem de Erro");
+
             }
         }
 
@@ -112,50 +117,58 @@ public class QuestoesServlet extends HttpServlet {
      * @param response
      * @return
      */
-    public static boolean cadastroQuest(HttpServletRequest request, HttpServletResponse response) {
-        boolean cadastrado = false;
-        Pergunta quest = new Pergunta();
-        Resposta[] alternativa = {
-            new Resposta(request.getParameter("resposta_a"), (request.getParameter("check").equals("0")) ? true : false),
-            new Resposta(request.getParameter("resposta_b"), (request.getParameter("check").equals("1")) ? true : false),
-            new Resposta(request.getParameter("resposta_c"), (request.getParameter("check").equals("2")) ? true : false),
-            new Resposta(request.getParameter("resposta_d"), (request.getParameter("check").equals("3")) ? true : false),
-            new Resposta(request.getParameter("resposta_e"), (request.getParameter("check").equals("4")) ? true : false)
-        };
+    public static int cadastroQuest(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
 
-        quest.setTitulo(request.getParameter("tituloQuest"));
-        quest.setQuestao(request.getParameter("questTexto"));
-        quest.setResposta_certa(alternativa);
+        try {
+            if (request.getParameter("resposta_a").isEmpty() || request.getParameter("resposta_b").isEmpty() || request.getParameter("resposta_c").isEmpty() || request.getParameter("resposta_d").isEmpty() || request.getParameter("resposta_e").isEmpty() || request.getParameter("resposta_a") == null || request.getParameter("resposta_b") == null || request.getParameter("resposta_c") == null || request.getParameter("resposta_d") == null || request.getParameter("resposta_e") == null || request.getParameter("check") == null || request.getParameter("check").isEmpty()) {
+                session.setAttribute("erro_cadastro_quest", "vazio");
 
-        PerguntaDao daoPergunta = new PerguntaDao();
-        RespostaDao daoResposta = new RespostaDao();
+                response.sendRedirect("admin/index.jsp");
 
-        int id_quest = daoPergunta.cadastrar(quest);
+            }
+            Pergunta quest = new Pergunta();
+            Resposta[] alternativa = {
+                new Resposta(request.getParameter("resposta_a"), (request.getParameter("check").equals("0")) ? true : false),
+                new Resposta(request.getParameter("resposta_b"), (request.getParameter("check").equals("1")) ? true : false),
+                new Resposta(request.getParameter("resposta_c"), (request.getParameter("check").equals("2")) ? true : false),
+                new Resposta(request.getParameter("resposta_d"), (request.getParameter("check").equals("3")) ? true : false),
+                new Resposta(request.getParameter("resposta_e"), (request.getParameter("check").equals("4")) ? true : false)
+            };
 
-        if (id_quest != 0) {
+            quest.setTitulo(request.getParameter("tituloQuest"));
+            quest.setQuestao(request.getParameter("questTexto"));
+            quest.setResposta_certa(alternativa);
 
-            int cont = 0;
+            PerguntaDao daoPergunta = new PerguntaDao();
+            RespostaDao daoResposta = new RespostaDao();
 
-            //Cadastrando Resposta
-            for (Resposta alternativas : alternativa) {
-                if (daoResposta.cadastrar(alternativas.getResposta(), id_quest, alternativas.isCorreta())) {
-                    cont++;
+            int id_quest = daoPergunta.cadastrar(quest);
+
+            if (id_quest != 0) {
+
+                int cont = 0;
+
+                //Cadastrando Resposta
+                for (Resposta alternativas : alternativa) {
+                    if (daoResposta.cadastrar(alternativas.getResposta(), id_quest, alternativas.isCorreta())) {
+                        cont++;
+                    }
                 }
-            }
-            if (cont == 5) {
-                //Cadastrou a Pergunta e as Alternativas
-                cadastrado = true;
+                if (cont == 5) {
+                    //Cadastrou a Pergunta e as Alternativas
+                    cadastrado = 0;
+                }
+
             } else {
-                System.out.println("Não Cadastrou Alternativas");
-                //Não cadastrou as Alternativas
+
+                //Não Cadastrou a Questão
             }
 
-        } else {
-            System.out.println("Não Cadastrou a Questão");
-            //Não Cadastrou a Questão
+            return cadastrado;
+        } catch (IOException ex) {
+            Logger.getLogger(QuestoesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return cadastrado;
     }
 
     public static boolean editarQuest(HttpServletRequest request, HttpServletResponse response, int id) {
@@ -166,7 +179,7 @@ public class QuestoesServlet extends HttpServlet {
         if (new RespostaDao().deletar(id)) {
             if (new PerguntaDao().deletar(id)) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         } else {

@@ -16,6 +16,33 @@
 <tag:header_admin title="BioQuiz - Administração" titlePage="BioQuiz Web | Questões" caminho="../resources"/>
 
 <tag:conteudoInicio />
+
+<%if (session.getAttribute("erro_cadastro_quest") != null) {%>
+<%if (session.getAttribute("erro_cadastro_quest").equals("false")) {%>
+<div id="alert" class="alert alert-success col-lg-12" role="alert" style="text-align: center">
+    <strong>Questão cadastrada com sucesso!</strong>
+    <%
+        session.setAttribute("erro_cadastro_quest", null);
+    %>
+</div>
+<%} else if (session.getAttribute("erro_cadastro_quest").equals("bd")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Erro no banco de dados! Entre em contato com os administradores.</strong>
+    <%session.setAttribute("erro_cadastro_quest", null);%>
+</div>
+<%} else if (session.getAttribute("erro_cadastro_quest").equals("nao_marcado")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Selecione qual é a pergunta correta!</strong>
+    <%session.setAttribute("erro_cadastro", null);%>
+</div>
+<%} else {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Preencha todos os campos!</strong>
+    <%session.setAttribute("erro_cadastro", null);%>
+</div>
+<%}%>
+<%}%>
+
 <tag:open_coluna tamanho="12"/>
 
 <%
