@@ -8,7 +8,7 @@ username VARCHAR(30) NOT NULL,
 nome VARCHAR(80) NOT NULL,
 email TEXT NOT NULL,
 senha TEXT NOT NULL,
-tipo BIT DEFAULT 0
+tipo INT(2) DEFAULT 0
 );
 
 CREATE TABLE pontuacao(
@@ -27,7 +27,7 @@ pergunta TEXT NOT NULL
 CREATE TABLE resposta(
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 resposta TEXT NOT NULL,
-certa BIT NOT NULL DEFAULT 0,
+certa INT(2) NOT NULL DEFAULT 0,
 id_pergunta INT NOT NULL,
 FOREIGN KEY (id_pergunta) REFERENCES questao(id)
 );
