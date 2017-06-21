@@ -47,7 +47,9 @@
                                  style="width: 30px;height: 35px">
                         </a>
                         <p class="navbar-text navbar-left" style="color: white; margin-left: 10px; font-size: 14px"><strong>BotaniQuiz</strong></p>
+                        <%if(usuarioLogado!=null){%>
                         <p class="navbar-text navbar-right" style="color: white; margin-right: 10px">Seja bem vindo, <%= usuarioLogado.getNome() + " " + usuarioLogado.getSobrenome()%>!</p>
+                        <%}%>
                     </div>
                 </nav>
             </div>

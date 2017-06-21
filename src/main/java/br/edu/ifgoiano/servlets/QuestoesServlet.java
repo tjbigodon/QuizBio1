@@ -42,11 +42,18 @@ public class QuestoesServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+        int opCadastro = cadastroQuest(request, response);
+        
         if (request.getParameter("btn").equalsIgnoreCase("cadastrar")) {
-            if (cadastroQuest(request, response)) {
+            if (opCadastro == 0) {
                 session.setAttribute("erro_cadastro_quest", "false");
-            } else {
-
+                response.sendRedirect("admin/questoes.jsp");
+            } else if(opCadastro == 1){
+                session.setAttribute("erro_cadastro_quest", "vazio");
+                response.sendRedirect("admin/questoes.jsp");
+            } else if(opCadastro == 2){
+                session.setAttribute("erro_cadastro_quest", "resp_iguais");
+                response.sendRedirect("admin/questoes.jsp");
             }
         }
 
@@ -61,11 +68,10 @@ public class QuestoesServlet extends HttpServlet {
             }
 
         } else if (edicoes[0].trim().equals("excluir")) { //Botão Excluir
-
-            if (excluirQuest(request, response, Integer.parseInt(edicoes[1]))) {
-                System.out.println("Excluiu");
-            } else {
-                System.out.println("Não Excluiu");
+            boolean opExcluir = excluirQuest(request, response, Integer.parseInt(edicoes[1]));
+            if (opExcluir) {
+                session.setAttribute("deletou", "sucesso");
+                response.sendRedirect("admin/questoes.jsp");
             }
         }
 
@@ -117,16 +123,14 @@ public class QuestoesServlet extends HttpServlet {
      * @param response
      * @return
      */
-    public static int cadastroQuest(HttpServletRequest request, HttpServletResponse response) {
+    public static int cadastroQuest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
 
-        try {
-            if (request.getParameter("resposta_a").isEmpty() || request.getParameter("resposta_b").isEmpty() || request.getParameter("resposta_c").isEmpty() || request.getParameter("resposta_d").isEmpty() || request.getParameter("resposta_e").isEmpty() || request.getParameter("resposta_a") == null || request.getParameter("resposta_b") == null || request.getParameter("resposta_c") == null || request.getParameter("resposta_d") == null || request.getParameter("resposta_e") == null || request.getParameter("check") == null || request.getParameter("check").isEmpty()) {
-                session.setAttribute("erro_cadastro_quest", "vazio");
-
-                response.sendRedirect("admin/index.jsp");
-
-            }
+        if (request.getParameter("tituloQuest")==null||request.getParameter("tituloQuest").isEmpty()||request.getParameter("questTexto")==null||request.getParameter("questTexto").isEmpty()||request.getParameter("resposta_a").isEmpty() || request.getParameter("resposta_b").isEmpty() || request.getParameter("resposta_c").isEmpty() || request.getParameter("resposta_d").isEmpty() || request.getParameter("resposta_e").isEmpty() || request.getParameter("resposta_a") == null || request.getParameter("resposta_b") == null || request.getParameter("resposta_c") == null || request.getParameter("resposta_d") == null || request.getParameter("resposta_e") == null || request.getParameter("check") == null || request.getParameter("check").isEmpty()) {
+            return 1;
+        } else if(request.getParameter("resposta_a").equalsIgnoreCase(request.getParameter("resposta_b"))||request.getParameter("resposta_a").equalsIgnoreCase(request.getParameter("resposta_c"))||request.getParameter("resposta_a").equalsIgnoreCase(request.getParameter("resposta_d"))||request.getParameter("resposta_a").equalsIgnoreCase(request.getParameter("resposta_e"))||request.getParameter("resposta_b").equalsIgnoreCase(request.getParameter("resposta_c"))||request.getParameter("resposta_b").equalsIgnoreCase(request.getParameter("resposta_d"))||request.getParameter("resposta_b").equalsIgnoreCase(request.getParameter("resposta_e"))||request.getParameter("resposta_c").equalsIgnoreCase(request.getParameter("resposta_d"))||request.getParameter("resposta_c").equalsIgnoreCase(request.getParameter("resposta_e"))||request.getParameter("resposta_d").equalsIgnoreCase(request.getParameter("resposta_e"))){
+            return 2;
+        } else {
             Pergunta quest = new Pergunta();
             Resposta[] alternativa = {
                 new Resposta(request.getParameter("resposta_a"), (request.getParameter("check").equals("0")) ? true : false),
@@ -146,7 +150,7 @@ public class QuestoesServlet extends HttpServlet {
             int id_quest = daoPergunta.cadastrar(quest);
 
             if (id_quest != 0) {
-
+                
                 int cont = 0;
 
                 //Cadastrando Resposta
@@ -157,17 +161,11 @@ public class QuestoesServlet extends HttpServlet {
                 }
                 if (cont == 5) {
                     //Cadastrou a Pergunta e as Alternativas
-                    cadastrado = 0;
+                    return 0;
                 }
 
-            } else {
-
-                //Não Cadastrou a Questão
-            }
-
-            return cadastrado;
-        } catch (IOException ex) {
-            Logger.getLogger(QuestoesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            return 1;
         }
     }
 

@@ -25,23 +25,27 @@
         session.setAttribute("erro_cadastro_quest", null);
     %>
 </div>
-<%} else if (session.getAttribute("erro_cadastro_quest").equals("bd")) {%>
+<%}else if(session.getAttribute("erro_cadastro_quest").equals("resp_iguais")){%>
 <div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
-    <strong>Erro no banco de dados! Entre em contato com os administradores.</strong>
+    <strong>Há duas ou mais respostas iguais!</strong>
     <%session.setAttribute("erro_cadastro_quest", null);%>
-</div>
-<%} else if (session.getAttribute("erro_cadastro_quest").equals("nao_marcado")) {%>
-<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
-    <strong>Selecione qual é a pergunta correta!</strong>
-    <%session.setAttribute("erro_cadastro", null);%>
 </div>
 <%} else {%>
 <div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
     <strong>Preencha todos os campos!</strong>
-    <%session.setAttribute("erro_cadastro", null);%>
+    <%session.setAttribute("erro_cadastro_quest", null);%>
 </div>
 <%}%>
 <%}%>
+<%if (session.getAttribute("deletou") != null) {%>
+<%if (session.getAttribute("deletou").equals("sucesso")) {%>
+<div id="alert" class="alert alert-success col-lg-12" role="alert" style="text-align: center">
+    <strong>Questão removida com sucesso!</strong>
+    <%
+        session.setAttribute("deletou", null);
+    %>
+</div>
+<%}}%>
 
 <tag:open_coluna tamanho="12"/>
 
