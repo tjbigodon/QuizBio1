@@ -14,9 +14,15 @@ import java.sql.SQLException;
  * @author Naiane
  */
 public class ConnectionFactory {
+    private final String host = 	"https://node154737-12345.j.layershift.co.uk";
+	private final String login = 	"admin";
+	private final String password = "7jV30nIvDM5QJsS7";
+	private	final String bd = 	"quiz_bd";
+	private final String driver =	"jdbc:mysql";
+
      public Connection getConnection(){
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz_bd","root","");
+            return DriverManager.getConnection(driver+"/"+host+"/"+bd,login,password);
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
