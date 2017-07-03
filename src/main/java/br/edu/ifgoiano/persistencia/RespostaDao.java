@@ -46,15 +46,16 @@ public class RespostaDao {
         }
     }
     
-    public boolean atualizar(Resposta resposta){
-        String sql = "UPDATE resposta SET resposta=?, id_pergunta=? WHERE id=?;";
+    public boolean atualizar(String resposta, int id_pergunta, boolean correta, int id){
+        String sql = "UPDATE resposta SET resposta = ?, certa = ? WHERE id_pergunta = ? AND id = ?;";
         
         PreparedStatement stmt;
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, resposta.getResposta());
-            stmt.setInt(2, resposta.getId_pergunta());
-            stmt.setInt(3, resposta.getId());
+            stmt.setObject(1, resposta);
+            stmt.setBoolean(2, correta);            
+            stmt.setInt(3, id_pergunta);
+            stmt.setInt(4, id);
             
             stmt.execute();
             stmt.close();
@@ -98,7 +99,7 @@ public class RespostaDao {
                 resposta.setId(rs.getInt("id"));
                 resposta.setId_pergunta(rs.getInt("id_pergunta"));
                 resposta.setResposta(rs.getString("resposta"));
-                resposta.setCorreta(rs.getBoolean("correta"));
+                resposta.setCorreta(rs.getBoolean("certa"));
                 
                 lista.add(resposta);
             }

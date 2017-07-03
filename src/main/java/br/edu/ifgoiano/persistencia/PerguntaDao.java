@@ -43,13 +43,13 @@ public class PerguntaDao {
             ResultSet retornoID = stmt.getGeneratedKeys();
 
             int id = -1;
-            
+
             if (retornoID.next()) {
                 id = retornoID.getInt(1);
             } else {
                 // throw an exception from here
             }
-            
+
             stmt.close();
 
             return id;
@@ -60,13 +60,13 @@ public class PerguntaDao {
     }
 
     public boolean atualizar(Pergunta pergunta) {
-        String sql = "UPDATE questao SET pergunta=?, resp_quest=? WHERE id=?;";
+        String sql = "UPDATE questao SET titulo = ?, pergunta = ? WHERE id=?;";
 
         PreparedStatement stmt;
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, pergunta.getQuestao());
-            stmt.setObject(2, pergunta.getResposta_certa());
+            stmt.setString(1, pergunta.getTitulo());
+            stmt.setString(2, pergunta.getQuestao());
             stmt.setInt(3, pergunta.getId());
 
             stmt.execute();
@@ -129,5 +129,30 @@ public class PerguntaDao {
             Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+
+    public Pergunta getPergunta(int idPergunta) {
+        Pergunta questao_retorno = new Pergunta();
+        String sql = "SELECT * FROM questao WHERE id = ?";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, idPergunta);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                questao_retorno.setTitulo(rs.getString("titulo"));
+                questao_retorno.setId(rs.getInt("id"));
+                questao_retorno.setQuestao(rs.getString("pergunta"));
+            }
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+        return questao_retorno;
     }
 }

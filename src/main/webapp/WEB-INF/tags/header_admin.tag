@@ -31,6 +31,8 @@
         <link type="text/css" rel="stylesheet" href="${caminho}/styles/zabuto_calendar.min.css">
         <link type="text/css" rel="stylesheet" href="${caminho}/styles/pace.css">
         <link type="text/css" rel="stylesheet" href="${caminho}/styles/jquery.news-ticker.css">
+        <script src="${caminho}/script/jquery-1.10.2.min.js"></script>
+        <script src="${caminho}/script/bootstrap.min.js"></script>
     </head>
     <body>
         <div>
@@ -47,7 +49,7 @@
                                  style="width: 30px;height: 35px">
                         </a>
                         <p class="navbar-text navbar-left" style="color: white; margin-left: 10px; font-size: 14px"><strong>BotaniQuiz</strong></p>
-                        <%if(usuarioLogado!=null){%>
+                        <%if (usuarioLogado != null) {%>
                         <p class="navbar-text navbar-right" style="color: white; margin-right: 10px">Seja bem vindo, <%= usuarioLogado.getNome() + " " + usuarioLogado.getSobrenome()%>!</p>
                         <%}%>
                     </div>

@@ -20,6 +20,12 @@ public class Resposta {
         this.correta = correta;
     }
     
+    public Resposta(String resposta, boolean correta, int id) {
+        this.resposta = resposta;
+        this.correta = correta;
+        this.id = id;
+    }
+    
     public Resposta() {
         this.correta = false;
     }

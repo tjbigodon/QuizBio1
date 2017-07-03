@@ -25,7 +25,7 @@
         session.setAttribute("erro_cadastro_quest", null);
     %>
 </div>
-<%}else if(session.getAttribute("erro_cadastro_quest").equals("resp_iguais")){%>
+<%} else if (session.getAttribute("erro_cadastro_quest").equals("resp_iguais")) {%>
 <div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
     <strong>Há duas ou mais respostas iguais!</strong>
     <%session.setAttribute("erro_cadastro_quest", null);%>
@@ -45,7 +45,19 @@
         session.setAttribute("deletou", null);
     %>
 </div>
-<%}}%>
+<%}
+    }%>
+
+<%if (session.getAttribute("editou") != null) {%>
+<%if (session.getAttribute("editou").equals("sucesso")) {%>
+<div id="alert" class="alert alert-success col-lg-12" role="alert" style="text-align: center">
+    <strong>Questão atualizada com sucesso!</strong>
+    <%
+        session.setAttribute("editou", null);
+    %>
+</div>
+<%}
+    }%>
 
 <tag:open_coluna tamanho="12"/>
 
@@ -88,32 +100,31 @@
                             <td class="hidden-xs hidden-sm" style="text-align: center"><%= i + 1%></td>
                             <td class="hidden" style="text-align: center"><%= lista_questao.get(i).getId()%></td>
                             <td style="text-align: center"><%= lista_questao.get(i).getTitulo()%></td>
-                            <td style="text-align: center"><%= resposta.pesquisarPerguntaCerta(lista_questao.get(i).getId()).getResposta() %></td>
+                            <td style="text-align: center"><%= resposta.pesquisarPerguntaCerta(lista_questao.get(i).getId()).getResposta()%></td>
                             <td style="text-align: center">
                                 <div class="todo-actions" style="text-align: center">
                                     <div class="col-md-6 col-sm-12">
-                                        <button class="btn btn-square btn-xs" type="submit" style="background-color: rgba(255,255,255,0)"
-                                                value="editar_<%= lista_questao.get(i).getId()%>" name="btn">  
-                                            <i class="fa fa-edit" style="color: #444444"></i>
-                                        </button>
+                                        <a href="editar_questao.jsp">
+                                            <button class="btn btn-square btn-xs" type="submit" style="background-color: rgba(255,255,255,0)"
+                                                    value="editarPre_<%= lista_questao.get(i).getId()%>" name="btn" data-toggle="tooltip" title="Editar">  
+                                                <i class="fa fa-edit" style="color: #444444"></i>
+                                            </button>
+                                        </a>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <button class="btn btn-square btn-xs" type="submit" style="background-color: rgba(255,255,255,0)"
-                                                value="excluir_<%= lista_questao.get(i).getId()%>" name="btn">  
-                                            <i class="fa fa-trash-o" style="color: red" ></i>
-                                        </button>
+                                        <a href="#modal-excluir" data-toggle="modal" data-target="#modal-excluir" onclick="setID('excluir_<%= lista_questao.get(i).getId()%>')">
+                                            <button class="btn btn-square btn-xs" type="submit" style="background-color: rgba(255,255,255,0)"
+                                                    value="excluir_<%= lista_questao.get(i).getId()%>" name="btn" data-toggle="tooltip" title="Excluir">  
+                                                <i class="fa fa-trash-o" style="color: red" ></i>
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                             </td>
                         </tr>                
-                    <%}%>
+                        <%}%>
                     </tbody>
                 </table>
-                <div class="col-lg-12">
-                    <div class="col-lg-12" style="text-align: right; background-color: rgba(0,0,0,0)">
-                        <input id="btn" type="submit" class="btn btn-blue" value="Voltar" name="btn"/>
-                    </div>
-                </div>
             </form>
         </div>
     </div>
@@ -197,6 +208,50 @@
     </div>
 </div>
 <!-- Fim da Inserção -->
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    //Excluir
+    function setID(valor) {
+        document.getElementById('btnE').value = valor;
+    }
+</script>
+
+<%-- MODAL para deletar proposta --%>
+<div class="modal fade" id="modal-excluir">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                <h4 class="modal-title">Atenção</h4>
+            </div>
+            <div class="modal-body">
+                <p>Deseja realmente excluir esta questão?</p>
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-12 col-md-1" style="text-align: right">
+                    <div class="col-md-8">
+
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 10ch">Não</button>
+                    </div>
+                    <div class="col-md-2">
+                        <form id="form" method="POST" action="../QuestoesServlet">
+                            <button type="submit" id="btnE" type="button" class="btn btn-green" name="btn" style="width: 10ch">
+                                Sim
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <tag:close_coluna/>
 <tag:conteudoFim />
