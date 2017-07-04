@@ -1,3 +1,14 @@
+<%@page import="com.sun.javafx.scene.control.skin.VirtualFlow.ArrayLinkedList"%>
+<%@page import="br.edu.ifgoiano.modelo.Usuario"%>
+<%if (session.getAttribute("user_logado") != null) {
+        Usuario usr = (Usuario) session.getAttribute("user_logado");
+        if (usr.getTipo() == 0) {
+            response.sendRedirect("../index.jsp");
+        }
+    } else {
+        response.sendRedirect("../index.jsp");
+    }%>
+
 <%@page import="java.util.List"%>
 <%@page import="br.edu.ifgoiano.modelo.Resposta"%>
 <%@page import="br.edu.ifgoiano.persistencia.RespostaDao"%>
@@ -134,7 +145,7 @@
                         <div class="col-lg-2 col-sm-12 col-md-4">
                             <div class="form-actions text-center pal">                                
                                 <button class="btn btn-blue" type="submit" style="width: 18ch"
-                                        value="editar_<%= (String) session.getAttribute("editarProposta") %>" name="btn">  
+                                        value="editar_<%= (String) session.getAttribute("editarProposta")%>" name="btn">  
                                     Atualizar Questão
                                 </button>  
                             </div>

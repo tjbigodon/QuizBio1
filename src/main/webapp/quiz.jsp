@@ -10,12 +10,15 @@
     Usuario usr = (Usuario) session.getAttribute("user_logado");
 %>
 <%if (usr.getTipo() == 0) {%>
-<tag:header_user_root title="BotaniQuiz - Login" titlePage="BotaniQuiz | Login" caminho="resources" paramVolta="user/"/>
+<tag:header_user_root title="BotaniQuiz - Questões" titlePage="BotaniQuiz | Questões" caminho="resources" paramVolta="user/"/>
 <%} else {%>
-<tag:header_admin_root title="BotaniQuiz - Login" titlePage="BotaniQuiz | Login" caminho="resources"/>
+<tag:header_admin_root title="BotaniQuiz - Questões" titlePage="BotaniQuiz | Qusetões" caminho="resources"/>
 <%}%>
 
 <tag:conteudoInicio />
+
+<script></script>
+
 
 <tag:conteudoFim />
 

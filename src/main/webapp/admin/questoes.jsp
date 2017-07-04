@@ -3,6 +3,15 @@
     Created on : 17/062017, 21:39:17
     Author     : Tarcisio & Jehymison
 --%>
+<%@page import="br.edu.ifgoiano.modelo.Usuario"%>
+<%if (session.getAttribute("user_logado") != null) {
+    Usuario usr = (Usuario) session.getAttribute("user_logado");
+        if (usr.getTipo() == 0) {
+            response.sendRedirect("../index.jsp");
+        }
+    } else {
+        response.sendRedirect("../index.jsp");
+    }%>
 
 <%@page import="br.edu.ifgoiano.modelo.Resposta"%>
 <%@page import="br.edu.ifgoiano.persistencia.RespostaDao"%>

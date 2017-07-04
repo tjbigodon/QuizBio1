@@ -191,8 +191,6 @@ public class QuestoesServlet extends HttpServlet {
         }
 
         String valor = request.getParameter("echeck");
-        System.out.println(valor);
-        System.out.println(valor.equals("0"));
         
         //Valor de 0
         if (valor.equals("0")) {

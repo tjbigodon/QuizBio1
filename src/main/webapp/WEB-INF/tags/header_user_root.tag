@@ -2,6 +2,8 @@
 <%@attribute name="title" required="true" %>
 <%@attribute name="titlePage" required="true" %>
 <%@attribute name="caminho" required="true"%>
+<%@attribute name="paramVolta" required="true"%>
+
 
 <%
     Usuario usuarioLogado = (Usuario) session.getAttribute("user_logado");
@@ -42,7 +44,7 @@
             <div id="header-topbar-option-demo" class="page-header-topbar">
                 <nav id="topbar" role="navigation" style="margin-bottom: 0" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="topbar-main" style="background-color: #004200">
-                        <a class="navbar-brand" href="#" style="padding: 8px">
+                        <a class="navbar-brand" href="<%= paramVolta %>" style="padding: 8px">
                             <img alt="Brand" src="resources/img/botanica/cropped-folha.png"
                                  style="width: 30px;height: 35px">
                         </a>                        

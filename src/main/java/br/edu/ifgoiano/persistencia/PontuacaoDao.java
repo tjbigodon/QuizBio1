@@ -6,7 +6,6 @@
 package br.edu.ifgoiano.persistencia;
 
 import br.edu.ifgoiano.modelo.Pontuacao;
-import br.edu.ifgoiano.modelo.Resposta;
 import br.edu.ifgoiano.modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +27,7 @@ public class PontuacaoDao {
     }
     
     public boolean cadastrar(Pontuacao pontuacao){
-        String sql = "INSERT INTO pontuacao(id_usuario,pontos) VALUES (?,?);";
+        String sql = "INSERT INTO pontuacao(id_usuario, pontos) VALUES (?,?);";
         
         PreparedStatement stmt;
         try {
@@ -47,7 +46,7 @@ public class PontuacaoDao {
     }
     
     public ArrayList<Pontuacao> listar(int id){
-        String sql = "SELECT * FROM pontuacao WHERE id=?;";
+        String sql = "SELECT * FROM pontuacao WHERE id = ?;";
         
         try {
             
