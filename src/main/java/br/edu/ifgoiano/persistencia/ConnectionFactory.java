@@ -15,9 +15,9 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
 
-    private final String host = "node154847-connection-bio01.j.layershift.co.uk/quiz_bd";
-    private final String user = "user_quiz";
-    private final String password = "CCPVIg78uh5srKI0";
+    private final String host = "jdbc:mysql://localhost:3306/quiz_bd?zeroDateTimeBehavior=convertToNull";
+    private final String user = "root";
+    private final String password = "";
     private final String driver = "com.mysql.jdbc.Driver";
 
     public Connection getConnection() {

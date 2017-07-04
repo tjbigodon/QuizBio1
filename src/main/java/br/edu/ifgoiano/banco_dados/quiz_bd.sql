@@ -1,4 +1,4 @@
-INSERT INTO questao (id, caminho, titulo, pergunta) VALUES
+﻿INSERT INTO questao (id, caminho, titulo, pergunta) VALUES
 (1, NULL, 'Briófitas', '_________ são plantas pequenas, geralmente com alguns poucos centímetros de altura, que vivem preferencialmente em locais úmidos e sombreados. '),
 (2, NULL, 'Rizoides', 'Os ________ são filamentos que fixam a planta no ambiente em que ela vive.'),
 (3, NULL, 'Anterozoides e OOsfera', 'As briófitas dependem da água para a reprodução sexuada. Nesta situação, os gametas masculinos (¬__________) se deslocam, com auxílio de seus flagelos, até os gametas femininos da planta (__________). Ao fecundar, o zigoto sofre mitose formando o embrião.'),
@@ -65,3 +65,4 @@ INSERT INTO resposta (id, resposta, certa, id_pergunta) VALUES
 INSERT INTO usuario (id, username, nome, email, senha, tipo) VALUES
 (3, 'Jehymes', 'Jehymison Gil_Alves Oliveira', 'jehymes@gmail.com', '202CB962AC59075B964B07152D234B70', 0),
 (4, 'admin', 'Jehymison Gil_Alves Oliveira', 'admin@admin.com', '21232F297A57A5A743894A0E4A801FC3', 1);
+ SELECT usuario.nome, pontos FROM pontuacao, usuario WHERE id_usuario = usuario.id ORDER BY pontos DESC;

@@ -5,12 +5,14 @@
  */
 package br.edu.ifgoiano.servlets;
 
+import br.edu.ifgoiano.modelo.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,7 +33,17 @@ public class RankingServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        HttpSession session = request.getSession();
+
+        String btn = request.getParameter("btn");
+        Usuario usr = (Usuario) session.getAttribute("user_logado");
+
+        if (btn.equalsIgnoreCase("voltar") && usr.getTipo() == 0) {
+            response.sendRedirect("user/");
+        } else {
+            response.sendRedirect("admin/");
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

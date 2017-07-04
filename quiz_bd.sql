@@ -11,8 +11,15 @@ senha TEXT NOT NULL,
 tipo INT(2) DEFAULT 0
 );
 
+INSERT INTO usuario(username, nome, senha, tipo) VALUES('admin', 'Administrador', MD5('admin'), 1);
+INSERT INTO usuario(username, nome, senha, tipo) VALUES('Jehymes', 'Jehymison Gil_Alves Oliveira', MD5('123'), 0);
+INSERT INTO usuario(username, nome, senha, tipo) VALUES('Maria', 'Maria_de Lima', MD5('12345'), 0);
+INSERT INTO usuario(username, nome, senha, tipo) VALUES('Xanaina', 'Janaina_Pereira', MD5('12345'), 0);
+INSERT INTO usuario(username, nome, senha, tipo) VALUES('Kabron', 'Rafael_Moura', MD5('12345'), 0);
+INSERT INTO usuario(username, nome, senha, tipo) VALUES('Korean', 'Jockin_Jhon Hum', MD5('12345'), 0);
+
 CREATE TABLE pontuacao(
-id INT NOT NULL PRIMARY KEY,
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_usuario INT NOT NULL,
 pontos INT,
 FOREIGN KEY (id_usuario) REFERENCES usuario(id)

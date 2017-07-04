@@ -1805,7 +1805,7 @@ canvas {
   position: absolute;
   display: block;
   width: 7px;
-  background: #ffffff;
+  background: #444;
   left: 50%;
   top: 20px;
   bottom: 20px;

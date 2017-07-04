@@ -37,5 +37,4 @@ public class Pontuacao {
     public void setPontos(int pontos) {
         this.pontos = pontos;
     }
-    
 }
