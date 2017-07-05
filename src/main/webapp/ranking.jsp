@@ -34,14 +34,12 @@
             for (int i = 0; i < ranking.size(); i++) {
                 if (ranking.get(i).getId_usuario().getId() == usr.getId() && maior.get(j).getPontos() == ranking.get(i).getPontos()) {
                     olho = i;
-                    valorMaior = 1;
                 }
             }
         }%>
-
-
-    <%if (ranking.size() != 0 && valorMaior == 1) {%> <!-- Já jogou o quiz? -->
-    <%if (olho < 5 && olho != -1) {%> <!-- if olho > 5 -->
+        
+    <%if (ranking.size() != 0 && olho != 0) {%> <!-- Já jogou o quiz? -->
+    <%if (olho < 5) {%> <!-- if olho > 5 -->
     <div class="col-lg-5">
         <div class="col-lg-12">
             <div class="col-lg-12">
@@ -132,7 +130,6 @@
 
     <%} else if (olho >= 5) {%> <!-- else olho > 5 -->
     <!-- Classíficação do Usuário -->
-    <!-- Mensagem continue tentando -->
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
         <div class="col-lg-12">
@@ -151,207 +148,56 @@
                 </form>
             </div>
         </div>
-    </div> 
+    </div> <!-- Mensagem continue tentando -->
     <div class="col-lg-3"></div>
-    <!-- Mensagem continue tentando -->
-
-    <!-- Mostra ranking da classificação do usuário -->
-    <div class="col-lg-7">
-        <div class="page-content" style="margin-top: -3ch">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="portlet box">
-                        <div class="portlet-header" style="background-color: gray">
-                            <div class="caption center" style="color: white">
-                                <strong>Sua Classíficação</strong>
-                            </div>
-                            <div class="tools">
-                                <a style="color: white">
-                                    <i class="fa fa-refresh"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class=" portlet-body col-lg-12 portlet box">
-                            <!-- Ranking -->
-                            <div class="timeline-centered timeline-sm">
-                                <%if (olho == limite) {%>
-                                <%for (int x = olho - 2; x <= ranking.size() - 1; x++) {%>
-                                <%if ((x % 2) == 0) {%>
-                                <!-- Ranking -->
-                                <article class="timeline-entry" style="color: black">
-                                    <div class="timeline-entry-inner" style="color: black">
-                                        <div class="timeline-icon" 
-                                             style="color: black; border-color: #444; background-color: white">
-                                            <i class="fa fa-user" style="color: black"></strong></i>
-                                        </div>
-                                        <div class="timeline-label bg-grey">
-                                            <h4 class="timeline-title">
-                                                <strong><%= x + 1%>º</strong> | <strong><%= ranking.get(x).getId_usuario().getNick()%></strong>
-                                            </h4>
-                                            <p>Pontuação: <%= ranking.get(x).getPontos()%></p>
-                                            Nome: <%= ranking.get(x).getId_usuario().getNome() + " " + ranking.get(x).getId_usuario().getSobrenome()%>
-                                        </div>
-                                    </div>
-                                </article>
-                                <%} else {%>
-                                <article class="timeline-entry left-aligned" style="color: black">
-                                    <div class="timeline-entry-inner" style="color: black">
-                                        <div class="timeline-icon" 
-                                             style="color: black; border-color: #444; background-color: white">
-                                            <i class="fa fa-user" style="color: black"></i>
-                                        </div>
-                                        <div class="timeline-label bg-dark">
-                                            <h4 class="timeline-title">
-                                                <strong><strong><%= x + 1%>º</strong> | <%= ranking.get(x).getId_usuario().getNick()%></strong>
-                                            </h4>
-                                            <p>Pontuação: <%= ranking.get(x).getPontos()%></p>
-                                            Nome: <%= ranking.get(x).getId_usuario().getNome() + " " + ranking.get(x).getId_usuario().getSobrenome()%>
-                                        </div>
-                                    </div>
-                                </article>
-                                <%}%>
-                                <%}%>
-                                <article class="timeline-entry">
-                                    <div class="timeline-entry-inner">
-                                        <div class="timeline-icon" 
-                                             style="color: black; border-color: #444; background-color: white">
-                                            <i class="fa fa-circle" style="color: #444"></i>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
+    <div class="col-lg-12">
+        <%if (olho == limite) {%>
+        <%for (int x = olho - 2; x <= ranking.size() - 1; x++) {%>
+        <%if ((x % 2) == 0) {%>
+        <!-- Ranking -->
+        <article class="timeline-entry" style="color: black">
+            <div class="timeline-entry-inner" style="color: black">
+                <div class="timeline-icon" 
+                     style="color: black; border-color: #444; background-color: white">
+                    <i class="fa fa-user" style="color: black"></strong></i>
+                </div>
+                <div class="timeline-label bg-grey">
+                    <h4 class="timeline-title">
+                        <strong><%= x + 1%>º</strong> | <strong><%= ranking.get(x).getId_usuario().getNick()%></strong>
+                    </h4>
+                    <p>Pontuação: <%= ranking.get(x).getPontos()%></p>
+                    Nome: <%= ranking.get(x).getId_usuario().getNome() + " " + ranking.get(x).getId_usuario().getSobrenome()%>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Mostra ranking da classificação do usuário -->
-
-    <!-- Mostra ranking dos 5 melhores -->
-    <div class="col-lg-5">
-        <div class="page-content" style="margin-top: -3ch">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="portlet box">
-                        <div class="portlet-header" style="background-color: gray">
-                            <div class="caption center" style="color: white">
-                                <strong>Hall da Fama</strong>
-                            </div>
-                            <div class="tools">
-                                <a style="color: white">
-                                    <i class="fa fa-refresh"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class=" portlet-body col-lg-12 portlet box">
-                            <!-- Ranking -->
-                            <div class="timeline-centered timeline-sm">
-                                <%for (int i = 0; i < 5; i++) {%>
-                                <%if ((i % 2) == 0) {%>
-                                <article class="timeline-entry" style="color: black">
-                                    <div class="timeline-entry-inner" style="color: black">
-                                        <div class="timeline-icon" 
-                                             style="color: black; border-color: #444; background-color: white">
-                                            <i class="fa fa-user" style="color: black"></strong></i>
-                                        </div>
-                                        <div class="timeline-label bg-grey">
-                                            <h4 class="timeline-title">
-                                                <strong><%= i + 1%>º</strong> | <strong><%= ranking.get(i).getId_usuario().getNick()%></strong>
-                                            </h4>
-                                            <p>Pontuação: <%= ranking.get(i).getPontos()%></p>
-                                            Nome: <%= ranking.get(i).getId_usuario().getNome() + " " + ranking.get(i).getId_usuario().getSobrenome()%>
-                                        </div>
-                                    </div>
-                                </article>
-                                <%} else {%>
-                                <article class="timeline-entry left-aligned" style="color: black">
-                                    <div class="timeline-entry-inner" style="color: black">
-                                        <div class="timeline-icon" 
-                                             style="color: black; border-color: #444; background-color: white">
-                                            <i class="fa fa-user" style="color: black"></i>
-                                        </div>
-                                        <div class="timeline-label bg-dark">
-                                            <h4 class="timeline-title">
-                                                <strong><strong><%= i + 1%>º</strong> | <%= ranking.get(i).getId_usuario().getNick()%></strong>
-                                            </h4>
-                                            <p>Pontuação: <%= ranking.get(i).getPontos()%></p>
-                                            Nome: <%= ranking.get(i).getId_usuario().getNome() + " " + ranking.get(i).getId_usuario().getSobrenome()%>
-                                        </div>
-                                    </div>
-                                </article>
-                                <%}
-                                    }%>
-                                <article class="timeline-entry">
-                                    <div class="timeline-entry-inner">
-                                        <div class="timeline-icon" 
-                                             style="color: black; border-color: #444; background-color: white">
-                                            <i class="fa fa-circle" style="color: #444"></i>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
+        </article>
+        <%} else {%>
+        <article class="timeline-entry left-aligned" style="color: black">
+            <div class="timeline-entry-inner" style="color: black">
+                <div class="timeline-icon" 
+                     style="color: black; border-color: #444; background-color: white">
+                    <i class="fa fa-user" style="color: black"></i>
+                </div>
+                <div class="timeline-label bg-dark">
+                    <h4 class="timeline-title">
+                        <strong><strong><%= x + 1%>º</strong> | <%= ranking.get(x).getId_usuario().getNick()%></strong>
+                    </h4>
+                    <p>Pontuação: <%= ranking.get(x).getPontos()%></p>
+                    Nome: <%= ranking.get(x).getId_usuario().getNome() + " " + ranking.get(x).getId_usuario().getSobrenome()%>
                 </div>
             </div>
-        </div>
+        </article>
+        <%}%>
+        <%}%>
+        <article class="timeline-entry">
+            <div class="timeline-entry-inner">
+                <div class="timeline-icon" 
+                     style="color: black; border-color: #444; background-color: white">
+                    <i class="fa fa-circle" style="color: #444"></i>
+                </div>
+            </div>
+        </article>
     </div>
-    <!-- Fim do Ranking -->
-
-    <%} else {%>
-    <%for (int x = olho - 2; x <= ranking.size() - 2; x++) {%>
-    <%if ((x % 2) == 0) {%>
-    <article class="timeline-entry" style="color: black">
-        <div class="timeline-entry-inner" style="color: black">
-            <div class="timeline-icon" 
-                 style="color: black; border-color: #444; background-color: white">
-                <i class="fa fa-user" style="color: black"></strong></i>
-            </div>
-            <div class="timeline-label bg-grey">
-                <h4 class="timeline-title">
-                    <strong><%= x + 1%>º</strong> | <strong><%= ranking.get(x).getId_usuario().getNick()%></strong>
-                </h4>
-                <p>Pontuação: <%= ranking.get(x).getPontos()%></p>
-                Nome: <%= ranking.get(x).getId_usuario().getNome() + " " + ranking.get(x).getId_usuario().getSobrenome()%>
-            </div>
-        </div>
-    </article>
-    <%} else {%>
-    <article class="timeline-entry left-aligned" style="color: black">
-        <div class="timeline-entry-inner" style="color: black">
-            <div class="timeline-icon" 
-                 style="color: black; border-color: #444; background-color: white">
-                <i class="fa fa-user" style="color: black"></i>
-            </div>
-            <div class="timeline-label bg-dark">
-                <h4 class="timeline-title">
-                    <strong><strong><%= x + 1%>º</strong> | <%= ranking.get(x).getId_usuario().getNick()%></strong>
-                </h4>
-                <p>Pontuação: <%= ranking.get(x).getPontos()%></p>
-                Nome: <%= ranking.get(x).getId_usuario().getNome() + " " + ranking.get(x).getId_usuario().getSobrenome()%>
-            </div>
-        </div>
-    </article>
-    <%}%>
-    <%}%>
-    <article class="timeline-entry">
-        <div class="timeline-entry-inner">
-            <div class="timeline-icon" 
-                 style="color: black; border-color: #444; background-color: white">
-                <i class="fa fa-circle" style="color: #444"></i>
-            </div>
-        </div>
-    </article>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Mostra ranking da classificação do usuário -->
+</div> <!-- Mostra ranking da classificação do usuário -->
 <div class="col-lg-5">
     <div class="page-content" style="margin-top: -3ch">
         <div class="row">
@@ -404,7 +250,145 @@
                                 </div>
                             </article>
                             <%}
-                                    }%>
+                                }%>
+                            <article class="timeline-entry">
+                                <div class="timeline-entry-inner">
+                                    <div class="timeline-icon" 
+                                         style="color: black; border-color: #444; background-color: white">
+                                        <i class="fa fa-circle" style="color: #444"></i>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <!-- Fim do Ranking -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- Mostra ranking dos 5 melhores -->
+<%} else {%>
+<div class="col-lg-7">
+    <div class="page-content" style="margin-top: -3ch">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="portlet box">
+                    <div class="portlet-header" style="background-color: gray">
+                        <div class="caption center" style="color: white">
+                            <strong>Sua Classíficação</strong>
+                        </div>
+                        <div class="tools">
+                            <a style="color: white">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class=" portlet-body col-lg-12 portlet box">
+                        <!-- Ranking -->
+                        <div class="timeline-centered timeline-sm">
+                            <%for (int x = olho - 2; x <= ranking.size() - 2; x++) {%>
+                            <%if ((x % 2) == 0) {%>
+                            <article class="timeline-entry" style="color: black">
+                                <div class="timeline-entry-inner" style="color: black">
+                                    <div class="timeline-icon" 
+                                         style="color: black; border-color: #444; background-color: white">
+                                        <i class="fa fa-user" style="color: black"></strong></i>
+                                    </div>
+                                    <div class="timeline-label bg-grey">
+                                        <h4 class="timeline-title">
+                                            <strong><%= x + 1%>º</strong> | <strong><%= ranking.get(x).getId_usuario().getNick()%></strong>
+                                        </h4>
+                                        <p>Pontuação: <%= ranking.get(x).getPontos()%></p>
+                                        Nome: <%= ranking.get(x).getId_usuario().getNome() + " " + ranking.get(x).getId_usuario().getSobrenome()%>
+                                    </div>
+                                </div>
+                            </article>
+                            <%} else {%>
+                            <article class="timeline-entry left-aligned" style="color: black">
+                                <div class="timeline-entry-inner" style="color: black">
+                                    <div class="timeline-icon" 
+                                         style="color: black; border-color: #444; background-color: white">
+                                        <i class="fa fa-user" style="color: black"></i>
+                                    </div>
+                                    <div class="timeline-label bg-dark">
+                                        <h4 class="timeline-title">
+                                            <strong><strong><%= x + 1%>º</strong> | <%= ranking.get(x).getId_usuario().getNick()%></strong>
+                                        </h4>
+                                        <p>Pontuação: <%= ranking.get(x).getPontos()%></p>
+                                        Nome: <%= ranking.get(x).getId_usuario().getNome() + " " + ranking.get(x).getId_usuario().getSobrenome()%>
+                                    </div>
+                                </div>
+                            </article>
+                            <%}%>
+                            <%}%>
+                            <article class="timeline-entry">
+                                <div class="timeline-entry-inner">
+                                    <div class="timeline-icon" 
+                                         style="color: black; border-color: #444; background-color: white">
+                                        <i class="fa fa-circle" style="color: #444"></i>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- Mostra ranking da classificação do usuário -->
+<div class="col-lg-5">
+    <div class="page-content" style="margin-top: -3ch">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="portlet box">
+                    <div class="portlet-header" style="background-color: gray">
+                        <div class="caption center" style="color: white">
+                            <strong>Hall da Fama</strong>
+                        </div>
+                        <div class="tools">
+                            <a style="color: white">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class=" portlet-body col-lg-12 portlet box">
+                        <!-- Ranking -->
+                        <div class="timeline-centered timeline-sm">
+                            <%for (int i = 0; i < 5; i++) {%>
+                            <%if ((i % 2) == 0) {%>
+                            <article class="timeline-entry" style="color: black">
+                                <div class="timeline-entry-inner" style="color: black">
+                                    <div class="timeline-icon" 
+                                         style="color: black; border-color: #444; background-color: white">
+                                        <i class="fa fa-user" style="color: black"></strong></i>
+                                    </div>
+                                    <div class="timeline-label bg-grey">
+                                        <h4 class="timeline-title">
+                                            <strong><%= i + 1%>º</strong> | <strong><%= ranking.get(i).getId_usuario().getNick()%></strong>
+                                        </h4>
+                                        <p>Pontuação: <%= ranking.get(i).getPontos()%></p>
+                                        Nome: <%= ranking.get(i).getId_usuario().getNome() + " " + ranking.get(i).getId_usuario().getSobrenome()%>
+                                    </div>
+                                </div>
+                            </article>
+                            <%} else {%>
+                            <article class="timeline-entry left-aligned" style="color: black">
+                                <div class="timeline-entry-inner" style="color: black">
+                                    <div class="timeline-icon" 
+                                         style="color: black; border-color: #444; background-color: white">
+                                        <i class="fa fa-user" style="color: black"></i>
+                                    </div>
+                                    <div class="timeline-label bg-dark">
+                                        <h4 class="timeline-title">
+                                            <strong><strong><%= i + 1%>º</strong> | <%= ranking.get(i).getId_usuario().getNick()%></strong>
+                                        </h4>
+                                        <p>Pontuação: <%= ranking.get(i).getPontos()%></p>
+                                        Nome: <%= ranking.get(i).getId_usuario().getNome() + " " + ranking.get(i).getId_usuario().getSobrenome()%>
+                                    </div>
+                                </div>
+                            </article>
+                            <%}
+                                }%>
                             <article class="timeline-entry">
                                 <div class="timeline-entry-inner">
                                     <div class="timeline-icon" 
@@ -441,15 +425,10 @@
         </form>
     </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <div class="col-lg-3"></div>
 <%}%>
+
+
 </div>
 
 

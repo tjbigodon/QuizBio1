@@ -18,51 +18,50 @@ import java.util.logging.Logger;
  * @author Naiane
  */
 public class UsuarioDao {
-
     Connection connection;
 
     public UsuarioDao() {
         this.connection = new ConnectionFactory().getConnection();
     }
-
-    public Usuario buscarPorNick(String username) {
+    
+    public Usuario buscarPorNick(String username){
         String sql = "SELECT * FROM usuario WHERE username like ? ;";
-
+        
         PreparedStatement stmt;
         try {
-            Usuario user = null;
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-
-            if (rs.first()) {
-
-                String nomeComp = rs.getString("nome");
-                String[] nomes = nomeComp.split("_|_\\s");
-                user = new Usuario();
-                user.setId(rs.getInt("id"));
-                user.setEmail(rs.getString("email"));
-                user.setNick(rs.getString("username"));
-                user.setSenha(rs.getString("senha"));
-                user.setNome(nomes[0].trim());
-                System.out.println(user.getNome());
-                user.setSobrenome(nomes[1].trim());
-                System.out.println(user.getSobrenome());
-                user.setTipo(rs.getInt("tipo"));
-
-                rs.close();
-                stmt.close();
-            }
+            
+            rs.first();
+            
+            String nomeComp = rs.getString("nome");
+            String[] nomes = nomeComp.split("_|_\\s");
+            
+            Usuario user = new Usuario();
+            user.setId(rs.getInt("id"));
+            user.setEmail(rs.getString("email"));
+            user.setNick(rs.getString("username"));
+            user.setSenha(rs.getString("senha"));
+            user.setNome(nomes[0].trim());
+            System.out.println(user.getNome());
+            user.setSobrenome(nomes[1].trim());
+            System.out.println(user.getSobrenome());
+            user.setTipo(rs.getInt("tipo"));
+            
+            rs.close();
+            stmt.close();
+                        
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
-
-    public boolean cadastrar(Usuario usuario) {
+    
+    public boolean cadastrar(Usuario usuario){
         String sql = "INSERT INTO usuario(nome,email,senha, username, tipo) VALUES (?,?,?,?,?);";
-
+        
         PreparedStatement stmt;
         try {
             stmt = connection.prepareStatement(sql);
@@ -71,16 +70,17 @@ public class UsuarioDao {
             stmt.setString(3, usuario.getSenha());
             stmt.setString(4, usuario.getNick());
             stmt.setInt(5, usuario.getTipo());
-
+            
             stmt.execute();
             stmt.close();
-
+                        
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
-
+    
     //logar
+    
 }
