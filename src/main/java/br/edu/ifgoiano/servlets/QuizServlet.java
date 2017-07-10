@@ -5,13 +5,19 @@
  */
 package br.edu.ifgoiano.servlets;
 
+import br.edu.ifgoiano.modelo.Pergunta;
+import br.edu.ifgoiano.modelo.Resposta;
+import br.edu.ifgoiano.persistencia.PerguntaDao;
+import br.edu.ifgoiano.persistencia.RespostaDao;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,6 +25,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "QuizServlet", urlPatterns = {"/QuizServlet"})
 public class QuizServlet extends HttpServlet {
+
+    String[] resposta = null;
+    PerguntaDao pega_questão = new PerguntaDao();
+    RespostaDao pega_resposta = new RespostaDao();
+    List<Pergunta> pergunta = pega_questão.getLista();
+    List<Resposta> alternativa = pega_resposta.listarPergunta();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +44,44 @@ public class QuizServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        HttpSession session = request.getSession();
+
+        if (request.getParameter("btn") != null && request.getParameter("btn").equals("proximo")) {
+            String sessao = (String) session.getAttribute("NovoQuiz");
+            String[] questoes = sessao.split("_");
+            Pergunta pgt = new Pergunta();
+
+            if (questoes[questoes.length - 1].contains("-") || sessao == null) {
+                response.sendRedirect("QuizServlet");
+            } else {
+                pgt = pega_questão.getPergunta(Integer.parseInt(questoes[questoes.length - 1]));
+            }
+            List<Resposta> resposta = pega_resposta.pesquisarPergunta(Integer.parseInt(questoes[questoes.length - 1]));
+
+            Resposta respostaCerta = pega_resposta.pesquisarPerguntaCerta(Integer.parseInt(questoes[questoes.length - 1]));
+
+            if (request.getParameter("resposta").equals(String.valueOf(respostaCerta.getId()))) {
+                session.setAttribute("NovoQuiz", session.getAttribute("NovoQuiz") + "-C_");
+            } else {
+                session.setAttribute("NovoQuiz", session.getAttribute("NovoQuiz") + "-E_");
+            }
+            
+            Pergunta pergunta = sorteiaPergunta(request, response, session);
+            
+            if(pergunta == null){
+                response.sendRedirect("ranking.jsp");
+            }
+        } else {
+            if (session.getAttribute("NovoQuiz") == null) {
+                System.out.println("Em branco");
+                session.setAttribute("NovoQuiz", "");
+            }
+
+            Pergunta pgt = sorteiaPergunta(request, response, session);
+
+        }
+        System.out.println(session.getAttribute("NovoQuiz"));
+        response.sendRedirect("quiz.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,5 +122,42 @@ public class QuizServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    public Pergunta sorteiaPergunta(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        String sessaoPerguntas = (String) session.getAttribute("NovoQuiz");
+
+        int contadorPerguntas = 0;
+        for (int i = 0; i < sessaoPerguntas.length(); i++) {
+            if (sessaoPerguntas.charAt(i) == '_') {
+                contadorPerguntas++;
+            }
+        }
+        if (contadorPerguntas != 9) {
+            Pergunta pgt = new Pergunta();
+            PerguntaDao pdao = new PerguntaDao();
+            List<Pergunta> perguntas = pdao.getLista();
+            int idPergunta = 1 + new Random().nextInt(perguntas.size());
+
+            if (idPergunta > perguntas.size()) {
+                idPergunta--;
+            }
+
+            while (sessaoPerguntas.contains("" + idPergunta)) {
+                idPergunta = new Random().nextInt(perguntas.size());
+
+                if (idPergunta > perguntas.size()) {
+                    idPergunta--;
+                }
+            }
+
+            pgt = pdao.getPergunta(idPergunta);
+            String id = String.valueOf(pgt.getId());
+            session.setAttribute("NovoQuiz", (String) session.getAttribute("NovoQuiz") + id);
+            System.out.println("*************************");
+            return pgt;
+        } else {
+            return null;
+        }
+    }
 
 }

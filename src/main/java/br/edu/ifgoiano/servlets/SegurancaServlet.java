@@ -38,6 +38,7 @@ public class SegurancaServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         session.setAttribute("user_logado", null);
+        session.setAttribute("NovoQuiz", null);
         session.setAttribute("erro_login", "deslogado");
         response.sendRedirect("index.jsp");
     }

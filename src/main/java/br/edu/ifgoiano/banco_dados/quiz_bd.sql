@@ -1,5 +1,5 @@
-﻿INSERT INTO questao (id, caminho, titulo, pergunta) VALUES
-(1, NULL, 'Briófitas', '_________ são plantas pequenas, geralmente com alguns poucos centímetros de altura, que vivem preferencialmente em locais úmidos e sombreados. '),
+INSERT INTO questao (id, caminho, titulo, pergunta) VALUES
+(1,NULL, 'Briófitas', '_________ são plantas pequenas, geralmente com alguns poucos centímetros de altura, que vivem preferencialmente em locais úmidos e sombreados. '),
 (2, NULL, 'Rizoides', 'Os ________ são filamentos que fixam a planta no ambiente em que ela vive.'),
 (3, NULL, 'Anterozoides e OOsfera', 'As briófitas dependem da água para a reprodução sexuada. Nesta situação, os gametas masculinos (¬__________) se deslocam, com auxílio de seus flagelos, até os gametas femininos da planta (__________). Ao fecundar, o zigoto sofre mitose formando o embrião.'),
 (4, NULL, 'Conhecimento sobre Pteridófitas', 'Uma garota estava observando a samambaia de sua mãe quando percebeu que todas as folhas estavam cheias de pontos escuros na face inferior. Achando que a planta em questão estava estragada, a menina arrancou todas as folhas da planta. De acordo com seus conhecimentos sobre pteridófitas, marque a alternativa que explica corretamente o que são os pontos pretos na folha.'),
