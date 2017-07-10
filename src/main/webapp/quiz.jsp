@@ -112,8 +112,8 @@
                                     </span>
                                 </div>
 
-                                <div class="input-group" style="margin: 5px">
-                                    <span class="input-group-addon" style="text-align: left; color: black; background-color: rgba(0,0,0,0)">
+                                <div class="input-group" style="margin: 5px; text-align: right">
+                                    <span class="input-group-addon" style="text-align: left; align-items: flex-end; color: black; background-color: rgba(0,0,0,0)">
                                         <input id="opE" type="radio" name="resposta" value="<%= resposta.get(4).getId()%>" style="text-align: left"/>
                                         E)
                                         <label for="opE" class="control-label">

@@ -34,11 +34,13 @@
             for (int i = 0; i < ranking.size(); i++) {
                 if (ranking.get(i).getId_usuario().getId() == usr.getId() && maior.get(j).getPontos() == ranking.get(i).getPontos()) {
                     olho = i;
+                    valorMaior = 1;
                 }
             }
         }%>
+
         
-    <%if (ranking.size() != 0 && olho != 0) {%> <!-- Já jogou o quiz? -->
+    <%if (ranking.size() != 0 && valorMaior == 1) {%> <!-- Já jogou o quiz? -->
     <%if (olho < 5) {%> <!-- if olho > 5 -->
     <div class="col-lg-5">
         <div class="col-lg-12">
@@ -76,7 +78,12 @@
                         <div class=" portlet-body col-lg-12 portlet box">
                             <!-- Ranking -->
                             <div class="timeline-centered timeline-sm">
-                                <%for (int i = 0; i < 5; i++) {%>
+                                <%Integer tamanho = new Integer(ranking.size());
+                                  if(ranking.size() > 5){
+                                    tamanho = 5;
+                                }%>
+                                
+                                <%for (int i = 0; i < tamanho; i++) {%>
                                 <%if ((i % 2) == 0) {%>
                                 <article class="timeline-entry" style="color: black">
                                     <div class="timeline-entry-inner" style="color: black">
@@ -109,8 +116,7 @@
                                         </div>
                                     </div>
                                 </article>
-                                <%}
-                                    }%>
+                                <%}}%>
                                 <article class="timeline-entry">
                                     <div class="timeline-entry-inner">
                                         <div class="timeline-icon" 
@@ -216,7 +222,11 @@
                     <div class=" portlet-body col-lg-12 portlet box">
                         <!-- Ranking -->
                         <div class="timeline-centered timeline-sm">
-                            <%for (int i = 0; i < 5; i++) {%>
+                            <%Integer tamanho = new Integer(ranking.size());
+                                  if(ranking.size() > 5){
+                                    tamanho = 5;
+                            }%>
+                            <%for (int i = 0; i < tamanho; i++) {%>
                             <%if ((i % 2) == 0) {%>
                             <article class="timeline-entry" style="color: black">
                                 <div class="timeline-entry-inner" style="color: black">
@@ -354,7 +364,11 @@
                     <div class=" portlet-body col-lg-12 portlet box">
                         <!-- Ranking -->
                         <div class="timeline-centered timeline-sm">
-                            <%for (int i = 0; i < 5; i++) {%>
+                            <%Integer tamanho = new Integer(ranking.size());
+                                  if(ranking.size() > 5){
+                                    tamanho = 5;
+                                }%>
+                            <%for (int i = 0; i < tamanho; i++) {%>
                             <%if ((i % 2) == 0) {%>
                             <article class="timeline-entry" style="color: black">
                                 <div class="timeline-entry-inner" style="color: black">

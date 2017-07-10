@@ -6,18 +6,23 @@
 package br.edu.ifgoiano.servlets;
 
 import br.edu.ifgoiano.modelo.Pergunta;
+import br.edu.ifgoiano.modelo.Pontuacao;
 import br.edu.ifgoiano.modelo.Resposta;
+import br.edu.ifgoiano.modelo.Usuario;
 import br.edu.ifgoiano.persistencia.PerguntaDao;
+import br.edu.ifgoiano.persistencia.PontuacaoDao;
 import br.edu.ifgoiano.persistencia.RespostaDao;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sun.rmi.server.Dispatcher;
 
 /**
  *
@@ -69,11 +74,15 @@ public class QuizServlet extends HttpServlet {
             Pergunta pergunta = sorteiaPergunta(request, response, session);
             
             if(pergunta == null){
-                response.sendRedirect("ranking.jsp");
+                RequestDispatcher dd = request.getRequestDispatcher("ranking.jsp");
+                if(contagemPontos(request, response, session)){
+                    dd.forward(request, response);                    
+                }
+                //response.sendRedirect("ranking.jsp");
             }
         } else {
             if (session.getAttribute("NovoQuiz") == null) {
-                System.out.println("Em branco");
+                //System.out.println("Em branco");
                 session.setAttribute("NovoQuiz", "");
             }
 
@@ -160,4 +169,30 @@ public class QuizServlet extends HttpServlet {
         }
     }
 
+    public boolean contagemPontos(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+        Usuario userPontos = (Usuario) session.getAttribute("user_logado");
+        String contaPontos = (String) session.getAttribute("NovoQuiz");
+        int cont = 0;
+        
+        for(int i = 0; i < contaPontos.length(); i++){
+            if(contaPontos.charAt(i) == 'C'){
+                cont++;
+            }
+        }
+        
+        int pontos = cont * 10;
+        
+        Pontuacao nPontos = new Pontuacao();
+        nPontos.setId_usuario(userPontos);
+        nPontos.setPontos(pontos);
+        
+        PontuacaoDao pUsu = new PontuacaoDao();
+        
+        if(pUsu.cadastrar(nPontos)){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
 }

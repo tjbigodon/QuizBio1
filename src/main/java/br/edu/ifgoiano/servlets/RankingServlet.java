@@ -6,6 +6,7 @@
 package br.edu.ifgoiano.servlets;
 
 import br.edu.ifgoiano.modelo.Usuario;
+import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +38,8 @@ public class RankingServlet extends HttpServlet {
 
         String btn = request.getParameter("btn");
         Usuario usr = (Usuario) session.getAttribute("user_logado");
-
+        limpaQuiz(request, response);
+                
         if (btn.equalsIgnoreCase("voltar") && usr.getTipo() == 0) {
             response.sendRedirect("user/");
         } else {
@@ -85,4 +87,10 @@ public class RankingServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public void limpaQuiz(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("NovoQuiz") != null){
+            session.setAttribute("NovoQuiz", null);
+        }
+    }
 }
