@@ -14,12 +14,18 @@ import java.sql.SQLException;
  * @author Naiane
  */
 public class ConnectionFactory {
-
+    ///*
     private final String host = "jdbc:mysql://localhost:3306/quiz_bd?zeroDateTimeBehavior=convertToNull";
     private final String user = "root";
     private final String password = "";
     private final String driver = "com.mysql.jdbc.Driver";
-
+    //*/
+    /*
+    private final String host = "jdbc:mysql://node155520-botaniquiz.j.layershift.co.uk/quiz_bd";
+    private final String user = "quiz_bd";
+    private final String password = "Snk8TxKkX0jWd4CN";
+    private final String driver = "com.mysql.jdbc.Driver";
+    */
     public Connection getConnection() {
         try {
             try {
