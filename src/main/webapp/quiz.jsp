@@ -44,13 +44,11 @@
 
 
 <!--Mostra Questão-->
-<div class="col-lg-2"></div>
-<div class="col-lg-8">
-
-
+<div class="col-lg-1"></div>
+<div class="col-lg-10">
     <!-- Carrega a Questão na tela -->
 
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="panel panel-green">
             <div class="panel-heading">
                 Questão</div>
@@ -58,71 +56,73 @@
                 <form action="QuizServlet" method="POST">
                     <div class="form-body pal">                    
                         <div class="form-group">
-                            <div class="text-justify">
+                            <div class="text-justify" style="color: black">
                                 <strong>
                                     <h3>
                                         <%=pgt.getQuestao()%>                                        
                                     </h3>
+                                    <hr>
                                 </strong>
                             </div>                            
                         </div>
                         <% System.out.println(pgt.getId());%>
                         <br><br>
-                        <div class="form-group text-left">
-                            <div class="input-icon right">
-                                <div class="input-group" style="margin: 5px;">
-                                    <span class="input-group-addon " style="text-align: left; color: black; background-color: rgba(0,0,0,0)">
+                        <div class="form-group text-left col-lg-12 col-md-12 col-sm-12">
+                            <div class="input-icon right col-lg-12 col-md-12 col-sm-12">
+                                <div class="input-group" style="margin: 5px; text-align: left; white-space: unset; display: flex">
+                                    <div style="font-size: initial">
                                         <input id="opA" type="radio" name="resposta" value="<%= resposta.get(0).getId()%>" style="text-align: left"/>
-                                        A)
-                                        <label for="opA" class="control-label">
+                                        <strong>A)</strong>
+                                        <label for="opA" class="control-label" style="color: black">
                                             <%=resposta.get(0).getResposta()%>
                                         </label>
-                                    </span>                                    
+                                    </div>
                                 </div>
+                                        <hr>
 
-                                <div class="input-group" style="margin: 5px">
-                                    <span class="input-group-addon" style="text-align: left; color: black; background-color: rgba(0,0,0,0)">
+                                <div class="input-group" style="margin: 5px; text-align: left; white-space: unset; display: flex">
+                                    <div style="font-size: initial">
                                         <input id="opB" type="radio" name="resposta" value="<%= resposta.get(1).getId()%>" style="text-align: left"/>
-                                        B)
-                                        <label for="opB" class="control-label">
+                                        <strong>B)</strong>
+                                        <label for="opB" class="control-label" style="color: black">
                                             <%=resposta.get(1).getResposta()%>
                                         </label>
-
-                                    </span>
+                                    </div>
                                 </div>
+                                        <hr>
 
-                                <div class="input-group" style="margin: 5px">
-                                    <span class="input-group-addon" style="text-align: left; color: black; background-color: rgba(0,0,0,0)">
+                                <div class="input-group" style="margin: 5px; text-align: left; white-space: unset; display: flex">
+                                    <div style="font-size: initial">
                                         <input id="opC" type="radio" name="resposta" value="<%= resposta.get(2).getId()%>" style="text-align: left"/>
-                                        C)
-                                        <label for="opC" class="control-label">
+                                        <strong>C)</strong>
+                                        <label for="opC" class="control-label" style="color: black">
                                             <%=resposta.get(2).getResposta()%>
                                         </label>
-
-                                    </span>
+                                    </div>
                                 </div>
+                                        <hr>
 
-                                <div class="input-group" style="margin: 5px">
-                                    <span class="input-group-addon" style="text-align: left; color: black; background-color: rgba(0,0,0,0)">
+                                <div class="input-group" style="margin: 5px; text-align: left; white-space: unset; display: flex">
+                                    <div style="font-size: initial">
                                         <input id="opD" type="radio" name="resposta" value="<%= resposta.get(3).getId()%>" style="text-align: left"/>
-                                        D)
-                                        <label for="opD" class="control-label">
+                                        <strong>D)</strong>
+                                        <label for="opD" class="control-label" style="color: black">
                                             <%=resposta.get(3).getResposta()%>
                                         </label>
-
-                                    </span>
+                                    </div>
                                 </div>
+                                        <hr>
 
-                                <div class="input-group" style="margin: 5px; text-align: right">
-                                    <span class="input-group-addon" style="text-align: left; align-items: flex-end; color: black; background-color: rgba(0,0,0,0)">
+                                <div class="input-group" style="margin: 5px; text-align: left; white-space: unset; display: flex">
+                                    <div style="font-size: initial">
                                         <input id="opE" type="radio" name="resposta" value="<%= resposta.get(4).getId()%>" style="text-align: left"/>
-                                        E)
-                                        <label for="opE" class="control-label">
+                                        <strong>E)</strong>
+                                        <label for="opE" class="control-label" style="color: black">
                                             <%=resposta.get(4).getResposta()%>
                                         </label>
-
-                                    </span>
+                                    </div>
                                 </div>
+                                        <hr>
                                 <div class="small" style="text-align: right">
                                     Obs.:Marque somente a resposta correta.
                                 </div>
@@ -132,10 +132,10 @@
                         <div class="col-lg-12 col-sm-12 col-md-12">
                             <div class="col-lg-5 col-sm-12 col-md-3">
                             </div>                        
-                            <div class="col-lg-3 col-sm-12 col-md-5">
-                                <div class="form-actions text-center pal">
+                            <div class="col-lg-12 col-sm-12 col-md-12" style="text-align: right">
+                                <div class="form-actions text-center pal" style="background-color: rgba(0,0,0,0)">
                                     <a href="QuizServlet">
-                                        <button class="btn btn-danger" style="width: 18ch"
+                                        <button class="btn btn-danger btn-block"
                                                 value="proximo" name="btn">Próximo
                                         </button>  
                                     </a>
@@ -150,7 +150,7 @@
 
     <!-- Carrega a Questão na tela -->
 
-    <div class="col-lg-2">
+    <div class="col-lg-1">
     </div>
 </div> 
 <!--Mostra Questão-->

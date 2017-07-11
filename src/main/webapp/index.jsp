@@ -89,7 +89,7 @@ if (session.getAttribute("erro_login").equals("deslogado")) {%>
                     
                     <div class="form-actions pal" style="background-color: #f0f2f5">
                         <div class="form-group mbn" style="text-align: right; padding: 0; margin: 0">
-                            <div class="col-md-offset-3 col-md-6">
+                            <div class="col-md-offset-6 col-md-6">
                                 <input type="submit" name="btn" value="Entrar" class="btn btn-primary"/>
                             </div>
                         </div>
