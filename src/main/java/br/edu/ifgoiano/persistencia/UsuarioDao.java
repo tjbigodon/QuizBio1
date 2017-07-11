@@ -79,8 +79,5 @@ public class UsuarioDao {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-    }
-    
-    //logar
-    
+    }    
 }

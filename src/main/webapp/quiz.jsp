@@ -66,7 +66,8 @@
                                 </strong>
                             </div>                            
                         </div>
-                                    <br><br>
+                        <% System.out.println(pgt.getId());%>
+                        <br><br>
                         <div class="form-group text-left">
                             <div class="input-icon right">
                                 <div class="input-group" style="margin: 5px;">
@@ -86,7 +87,7 @@
                                         <label for="opB" class="control-label">
                                             <%=resposta.get(1).getResposta()%>
                                         </label>
-                                        
+
                                     </span>
                                 </div>
 
@@ -97,7 +98,7 @@
                                         <label for="opC" class="control-label">
                                             <%=resposta.get(2).getResposta()%>
                                         </label>
-                                        
+
                                     </span>
                                 </div>
 
@@ -108,7 +109,7 @@
                                         <label for="opD" class="control-label">
                                             <%=resposta.get(3).getResposta()%>
                                         </label>
-                                        
+
                                     </span>
                                 </div>
 
@@ -119,7 +120,7 @@
                                         <label for="opE" class="control-label">
                                             <%=resposta.get(4).getResposta()%>
                                         </label>
-                                        
+
                                     </span>
                                 </div>
                                 <div class="small" style="text-align: right">

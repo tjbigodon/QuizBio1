@@ -70,15 +70,16 @@ public class QuizServlet extends HttpServlet {
             } else {
                 session.setAttribute("NovoQuiz", session.getAttribute("NovoQuiz") + "-E_");
             }
-            
+
             Pergunta pergunta = sorteiaPergunta(request, response, session);
-            
-            if(pergunta == null){
+
+            if (pergunta == null) {
+                contagemPontos(request, response, session);
                 response.sendRedirect("ranking.jsp");
-            }else{
+            } else {
                 response.sendRedirect("quiz.jsp");
             }
-            
+
         } else {
             if (session.getAttribute("NovoQuiz") == null) {
                 session.setAttribute("NovoQuiz", "");
@@ -141,54 +142,55 @@ public class QuizServlet extends HttpServlet {
             Pergunta pgt = new Pergunta();
             PerguntaDao pdao = new PerguntaDao();
             List<Pergunta> perguntas = pdao.getLista();
-            int idPergunta = 1 + new Random().nextInt(perguntas.size());
+            int idPergunta = new Random().nextInt(perguntas.size()) + 1;
 
             if (idPergunta > perguntas.size()) {
                 idPergunta--;
             }
 
-            while (sessaoPerguntas.contains("" + idPergunta)) {
-                idPergunta = new Random().nextInt(perguntas.size());
+            while (sessaoPerguntas.contains(idPergunta + "-")) {
+                idPergunta = new Random().nextInt(perguntas.size()) + 1;
 
                 if (idPergunta > perguntas.size()) {
                     idPergunta--;
-                }
-            }
+                } 
+            }       
 
             pgt = pdao.getPergunta(idPergunta);
             String id = String.valueOf(pgt.getId());
             session.setAttribute("NovoQuiz", (String) session.getAttribute("NovoQuiz") + id);
             System.out.println("*************************");
+            System.out.println("ID Pergunta: " + idPergunta);
             return pgt;
         } else {
             return null;
         }
     }
 
-    public boolean contagemPontos(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    public boolean contagemPontos(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         Usuario userPontos = (Usuario) session.getAttribute("user_logado");
         String contaPontos = (String) session.getAttribute("NovoQuiz");
         int cont = 0;
-        
-        for(int i = 0; i < contaPontos.length(); i++){
-            if(contaPontos.charAt(i) == 'C'){
+
+        for (int i = 0; i < contaPontos.length(); i++) {
+            if (contaPontos.charAt(i) == 'C') {
                 cont++;
             }
         }
-        
+
         int pontos = cont * 10;
-        
+
         Pontuacao nPontos = new Pontuacao();
         nPontos.setId_usuario(userPontos);
         nPontos.setPontos(pontos);
-        
+
         PontuacaoDao pUsu = new PontuacaoDao();
-        
-        if(pUsu.cadastrar(nPontos)){
+
+        if (pUsu.cadastrar(nPontos)) {
             return true;
-        }else{
+        } else {
             return false;
         }
-        
+
     }
 }
