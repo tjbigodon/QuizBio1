@@ -74,23 +74,19 @@ public class QuizServlet extends HttpServlet {
             Pergunta pergunta = sorteiaPergunta(request, response, session);
             
             if(pergunta == null){
-                RequestDispatcher dd = request.getRequestDispatcher("ranking.jsp");
-                if(contagemPontos(request, response, session)){
-                    dd.forward(request, response);                    
-                }
-                //response.sendRedirect("ranking.jsp");
+                response.sendRedirect("ranking.jsp");
+            }else{
+                response.sendRedirect("quiz.jsp");
             }
+            
         } else {
             if (session.getAttribute("NovoQuiz") == null) {
-                //System.out.println("Em branco");
                 session.setAttribute("NovoQuiz", "");
             }
 
             Pergunta pgt = sorteiaPergunta(request, response, session);
-
+            response.sendRedirect("quiz.jsp");
         }
-        System.out.println(session.getAttribute("NovoQuiz"));
-        response.sendRedirect("quiz.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
