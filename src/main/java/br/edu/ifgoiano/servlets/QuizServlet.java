@@ -15,7 +15,6 @@ import br.edu.ifgoiano.persistencia.RespostaDao;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -164,8 +163,8 @@ public class QuizServlet extends HttpServlet {
             pgt = pdao.getPergunta(idPergunta);
             String id = String.valueOf(pgt.getId());
             session.setAttribute("NovoQuiz", (String) session.getAttribute("NovoQuiz") + id);
-            System.out.println("*************************");
-            System.out.println("ID Pergunta: " + idPergunta);
+            //System.out.println("*************************");
+            //System.out.println("ID Pergunta: " + idPergunta);
             return pgt;
         } else {
             return null;

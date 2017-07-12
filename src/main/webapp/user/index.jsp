@@ -4,15 +4,20 @@
     Author     : Tarcisio & Jehymison
 --%>
 
+<%@page import="br.edu.ifgoiano.servlets.SegurancaServlet"%>
 <%@page import="br.edu.ifgoiano.modelo.Usuario"%>
-<%if (session.getAttribute("user_logado") == null) {
+<%
+    Usuario usr = new Usuario();
+    session.setAttribute("NovoQuiz", "");
+
+    if (SegurancaServlet.kickUser(request, response, session) == 0) {
         response.sendRedirect("../index.jsp");
-    } else {
-        Usuario usr = (Usuario) session.getAttribute("user_logado");
-        if (usr.getTipo() == 1) {
-            response.sendRedirect("../index.jsp");
-        }
-    }%>
+    } else if (SegurancaServlet.kickUser(request, response, session) == 1) {
+        response.sendRedirect("../user/");
+    } else if (SegurancaServlet.kickUser(request, response, session) == 2) {
+        usr = (Usuario) session.getAttribute("user_logado");
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
 <tag:header_user title="BioQuiz - Início" titlePage="BotaniQuiz | Início" caminho="../resources"/>
@@ -68,7 +73,7 @@
     </div>
     <div class="hidden-sm col-md-1"></div>
     <div class="col-sm-4 col-md-3">
-        <a href="../SegurancaServlet" style="color: black">
+            <a href="../SegurancaServlet?btn=sair" id="sair" style="color: black" type="submit" >
             <div class="panel profit db mbm">
                 <div class="panel-body">
                     <p class="icon">
@@ -83,7 +88,7 @@
                     </h4>
                     <br>
                     <p class="description">
-                        Sai do BioQuiz.
+                        Sair do BioQuiz.
                     </p>
                 </div>
             </div>

@@ -3,6 +3,7 @@
     Created on : 17/062017, 21:39:17
     Author     : Tarcisio & Jehymison
 --%>
+<%@page import="br.edu.ifgoiano.servlets.SegurancaServlet"%>
 <%@page import="java.util.Random"%>
 <%@page import="br.edu.ifgoiano.modelo.Resposta"%>
 <%@page import="br.edu.ifgoiano.modelo.Pergunta"%>
@@ -12,8 +13,20 @@
 <%@page import="br.edu.ifgoiano.modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
-<%
-    Usuario usr = (Usuario) session.getAttribute("user_logado");
+
+<%    
+    Usuario usr = new Usuario();
+
+    if (SegurancaServlet.kickUser(request, response, session) == 0) {
+        response.sendRedirect("index.jsp");
+    } else if (SegurancaServlet.kickUser(request, response, session) == 1) {
+        response.sendRedirect("../user/");
+    } else if (SegurancaServlet.kickUser(request, response, session) == 2) {
+        usr = (Usuario) session.getAttribute("user_logado");
+    }else if (SegurancaServlet.kickUser(request, response, session) == 3) {
+        usr = (Usuario) session.getAttribute("user_logado");
+    }
+    
     PerguntaDao pega_questão = new PerguntaDao();
     RespostaDao pega_resposta = new RespostaDao();
     String sessao = (String) session.getAttribute("NovoQuiz");
@@ -27,13 +40,7 @@
     }
     List<Resposta> resposta = pega_resposta.pesquisarPergunta(Integer.parseInt(questoes[questoes.length - 1]));
 %>
-<%if (session.getAttribute("user_logado") == null) {
-        response.sendRedirect("../index.jsp");
-    } else {
-        if (usr.getTipo() == 1) {
-            response.sendRedirect("../index.jsp");
-        }
-    }%>
+
 <%if (usr.getTipo() == 0) {%>
 <tag:header_user_root title="BotaniQuiz - Questões" titlePage="BotaniQuiz | Questões" caminho="resources" paramVolta="user/"/>
 <%} else {%>
@@ -44,7 +51,7 @@
 <%if (session.getAttribute("quiz_erro") != null) {
 if (session.getAttribute("quiz_erro").equals("erro")) {%>
 <div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
-    <strong>Escolha uma questão antes de passar para a próxima pergunta</strong>
+    <strong>Escolha uma alternativa antes de passar para a próxima pergunta</strong>
     <%session.setAttribute("quiz_erro", null);%>
 </div>
 <%}}%>
@@ -71,7 +78,6 @@ if (session.getAttribute("quiz_erro").equals("erro")) {%>
                                 </strong>
                             </div>                            
                         </div>
-                        <% System.out.println(pgt.getId());%>
                         <br><br>
                         <div class="form-group text-left col-lg-12 col-md-12 col-sm-12">
                             <div class="input-icon right col-lg-12 col-md-12 col-sm-12">

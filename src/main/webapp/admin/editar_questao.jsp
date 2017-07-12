@@ -1,13 +1,14 @@
+<%@page import="br.edu.ifgoiano.servlets.SegurancaServlet"%>
 <%@page import="com.sun.javafx.scene.control.skin.VirtualFlow.ArrayLinkedList"%>
 <%@page import="br.edu.ifgoiano.modelo.Usuario"%>
 <%if (session.getAttribute("user_logado") != null) {
         Usuario usr = (Usuario) session.getAttribute("user_logado");
         if (usr.getTipo() == 0) {
+            session.setAttribute("erro_login", "acesso_negado");
             response.sendRedirect("../index.jsp");
         }
-    } else {
-        response.sendRedirect("../index.jsp");
     }%>
+%>
 
 <%@page import="java.util.List"%>
 <%@page import="br.edu.ifgoiano.modelo.Resposta"%>

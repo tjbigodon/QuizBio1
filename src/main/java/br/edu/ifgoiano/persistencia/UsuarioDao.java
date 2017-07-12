@@ -44,14 +44,14 @@ public class UsuarioDao {
             user.setNick(rs.getString("username"));
             user.setSenha(rs.getString("senha"));
             user.setNome(nomes[0].trim());
-            System.out.println(user.getNome());
+            //System.out.println(user.getNome());
             user.setSobrenome(nomes[1].trim());
-            System.out.println(user.getSobrenome());
+            //System.out.println(user.getSobrenome());
             user.setTipo(rs.getInt("tipo"));
             
             rs.close();
             stmt.close();
-                        
+            connection.close();
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,7 +73,7 @@ public class UsuarioDao {
             
             stmt.execute();
             stmt.close();
-                        
+            connection.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);

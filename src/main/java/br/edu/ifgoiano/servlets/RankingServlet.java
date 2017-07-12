@@ -6,7 +6,6 @@
 package br.edu.ifgoiano.servlets;
 
 import br.edu.ifgoiano.modelo.Usuario;
-import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -38,6 +38,14 @@ if (session.getAttribute("erro_login").equals("deslogado")) {%>
     <strong>Nome de usuário e/ou senha incorreto(s)!</strong>
     <%session.setAttribute("erro_login", null);%>
 </div>
+<%} else if (session.getAttribute("erro_login").equals("acesso_negado")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>
+        Ops! Parece que você não tem acesso a esta página.<br>
+        Faça o login e tente novamente.
+    </strong>
+    <%session.setAttribute("erro_login", null);%>
+</div>
 <%} else if (session.getAttribute("erro_login").equals("vazio")) {%>
 <div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
     <strong>Preencha todos os campos!</strong>

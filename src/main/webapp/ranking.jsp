@@ -3,6 +3,7 @@
     Created on : 17/062017, 21:39:17
     Author     : Tarcisio & Jehymison
 --%>
+<%@page import="br.edu.ifgoiano.servlets.SegurancaServlet"%>
 <%@page import="java.util.List"%>
 <%@page import="br.edu.ifgoiano.persistencia.PontuacaoDao"%>
 <%@page import="br.edu.ifgoiano.modelo.Pontuacao"%>
@@ -10,7 +11,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
 <%
-    Usuario usr = (Usuario) session.getAttribute("user_logado");
+    Usuario usr = new Usuario();
+
+    if (SegurancaServlet.kickUser(request, response, session) == 0) {
+        response.sendRedirect("index.jsp");
+    } else if (SegurancaServlet.kickUser(request, response, session) == 1) {
+        response.sendRedirect("user/");
+    } else if (SegurancaServlet.kickUser(request, response, session) == 2) {
+        usr = (Usuario) session.getAttribute("user_logado");
+    }else if (SegurancaServlet.kickUser(request, response, session) == 3) {
+        usr = (Usuario) session.getAttribute("user_logado");
+    }
+
 %>
 <%if (usr.getTipo() == 0) {%>
 <tag:header_user_root title="BotaniQuiz - Ranking" titlePage="BotaniQuiz | Ranking" caminho="resources" paramVolta="user/"/>
@@ -39,7 +51,7 @@
             }
         }%>
 
-        
+
     <%if (ranking.size() != 0 && valorMaior == 1) {%> <!-- Já jogou o quiz? -->
     <%if (olho < 5) {%> <!-- if olho > 5 -->
     <div class="col-lg-5">
@@ -79,10 +91,10 @@
                             <!-- Ranking -->
                             <div class="timeline-centered timeline-sm">
                                 <%Integer tamanho = new Integer(ranking.size());
-                                  if(ranking.size() > 5){
-                                    tamanho = 5;
-                                }%>
-                                
+                                    if (ranking.size() > 5) {
+                                        tamanho = 5;
+                                    }%>
+
                                 <%for (int i = 0; i < tamanho; i++) {%>
                                 <%if ((i % 2) == 0) {%>
                                 <article class="timeline-entry" style="color: black">
@@ -116,7 +128,8 @@
                                         </div>
                                     </div>
                                 </article>
-                                <%}}%>
+                                <%}
+                                    }%>
                                 <article class="timeline-entry">
                                     <div class="timeline-entry-inner">
                                         <div class="timeline-icon" 
@@ -223,9 +236,9 @@
                         <!-- Ranking -->
                         <div class="timeline-centered timeline-sm">
                             <%Integer tamanho = new Integer(ranking.size());
-                                  if(ranking.size() > 5){
+                                if (ranking.size() > 5) {
                                     tamanho = 5;
-                            }%>
+                                }%>
                             <%for (int i = 0; i < tamanho; i++) {%>
                             <%if ((i % 2) == 0) {%>
                             <article class="timeline-entry" style="color: black">
@@ -365,7 +378,7 @@
                         <!-- Ranking -->
                         <div class="timeline-centered timeline-sm">
                             <%Integer tamanho = new Integer(ranking.size());
-                                  if(ranking.size() > 5){
+                                if (ranking.size() > 5) {
                                     tamanho = 5;
                                 }%>
                             <%for (int i = 0; i < tamanho; i++) {%>

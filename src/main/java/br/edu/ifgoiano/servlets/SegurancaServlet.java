@@ -5,9 +5,8 @@
  */
 package br.edu.ifgoiano.servlets;
 
-import com.sun.org.apache.regexp.internal.RESyntaxException;
+import br.edu.ifgoiano.modelo.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,13 +33,12 @@ public class SegurancaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         HttpSession session = request.getSession();
+        //System.out.println(request.getParameter("btn"));
+        if (request.getParameter("btn").equals("sair")) {
+            logout(session, request, response);
+        }
 
-        session.setAttribute("user_logado", null);
-        session.setAttribute("NovoQuiz", null);
-        session.setAttribute("erro_login", "deslogado");
-        response.sendRedirect("index.jsp");
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -82,4 +80,45 @@ public class SegurancaServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public static int kickUser(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+        Usuario user = (Usuario) session.getAttribute("user_logado");
+
+        if (user == null) {
+            //session.setAttribute("msg", "acesso_negado");
+            session.setAttribute("erro_login", "acesso_negado");
+            String url = String.valueOf(request.getRequestURL());
+            if (url.contentEquals("/user/index.jsp") || url.contentEquals("/admin/index.jsp")
+                    || url.contentEquals("/admin/editar_questao.jsp")
+                    || url.contentEquals("/admin/questoes.jsp")
+                    || url.contentEquals("ranking.jsp")
+                    || url.contentEquals("quiz.jsp")) {
+                //response.sendRedirect("index.jsp");
+                return 0;
+            }
+            return 0;
+        } else {
+            if (user.getTipo() == 0) {
+                //session.setAttribute("msg", "acesso_negado");
+                session.setAttribute("erro_login", "acesso_negado");
+                String url = String.valueOf(request.getRequestURL());
+                if (url.contentEquals("/admin/index.jsp") || url.contentEquals("/admin/editar_questao.jsp")
+                        || url.contentEquals("/admin/questoes.jsp")) {
+                    //response.sendRedirect("../user/index.jsp");
+                    return 1;
+                }
+            }else if(user.getTipo() == 1){
+                return 3;
+            }
+            
+            return 2;
+        }
+    }
+
+    public static void logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        session.setAttribute("user_logado", null);
+        session.setAttribute("NovoQuiz", null);
+        session.setAttribute("erro_login", "deslogado");
+        response.sendRedirect("index.jsp");
+
+    }
 }

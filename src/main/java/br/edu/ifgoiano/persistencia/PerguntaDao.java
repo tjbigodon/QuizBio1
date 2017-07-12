@@ -51,7 +51,8 @@ public class PerguntaDao {
             }
 
             stmt.close();
-
+            retornoID.close();
+            
             return id;
         } catch (SQLException ex) {
             Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,7 +72,7 @@ public class PerguntaDao {
 
             stmt.execute();
             stmt.close();
-
+            
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,7 +90,7 @@ public class PerguntaDao {
 
             stmt.execute();
             stmt.close();
-
+            
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,6 +125,7 @@ public class PerguntaDao {
             }
             rs.close();
             stmt.close();
+            
             return questao_retorno;
         } catch (SQLException ex) {
             Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,7 +149,7 @@ public class PerguntaDao {
             }
             rs.close();
             stmt.close();
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(PerguntaDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;

@@ -66,7 +66,7 @@ public class QuestoesServlet extends HttpServlet {
                 session.setAttribute("editou", "sucesso");
                 response.sendRedirect("admin/questoes.jsp");
             } else {
-                System.out.println("Não Editou");
+                //System.out.println("Não Editou");
             }
 
         } else if (edicoes[0].trim().equals("excluir")) { //Botão Excluir

@@ -3,15 +3,18 @@
     Created on : 17/062017, 21:39:17
     Author     : Tarcisio & Jehymison
 --%>
+<%@page import="br.edu.ifgoiano.servlets.SegurancaServlet"%>
 <%@page import="br.edu.ifgoiano.modelo.Usuario"%>
-<%if (session.getAttribute("user_logado") != null) {
-    Usuario usr = (Usuario) session.getAttribute("user_logado");
-        if (usr.getTipo() == 0) {
-            response.sendRedirect("../index.jsp");
-        }
-    } else {
+<%
+
+    if (SegurancaServlet.kickUser(request, response, session) == 0) {
         response.sendRedirect("../index.jsp");
-    }%>
+    } else if (SegurancaServlet.kickUser(request, response, session) == 1) {
+        response.sendRedirect("../user/");
+    } else if (SegurancaServlet.kickUser(request, response, session) == 2) {
+        response.sendRedirect("../user/");
+    }
+%>
 
 <%@page import="br.edu.ifgoiano.modelo.Resposta"%>
 <%@page import="br.edu.ifgoiano.persistencia.RespostaDao"%>
