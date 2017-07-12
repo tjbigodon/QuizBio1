@@ -42,9 +42,9 @@
 %>
 
 <%if (usr.getTipo() == 0) {%>
-<tag:header_user_root title="BotaniQuiz - Questões" titlePage="BotaniQuiz | Questões" caminho="resources" paramVolta="user/"/>
+<tag:header_user_root title="BioQuiz - Questões" titlePage="BioQuiz | Questões" caminho="resources" paramVolta="user/"/>
 <%} else {%>
-<tag:header_admin_root title="BotaniQuiz - Questões" titlePage="BotaniQuiz | Qusetões" caminho="resources"/>
+<tag:header_admin_root title="BioQuiz - Questões" titlePage="BioQuiz | Qusetões" caminho="resources"/>
 <%}%>
 
 <tag:conteudoInicio />

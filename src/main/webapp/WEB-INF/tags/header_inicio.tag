@@ -39,7 +39,7 @@
                 <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="topbar-main" style="align-content: center; font-size: 20pt; color: white">
                         <center>
-                            BotaniQuiz
+                            BioQuiz
                         </center>
                     </div>
                 </nav>

@@ -20,7 +20,7 @@
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
-<tag:header_user title="BioQuiz - Início" titlePage="BotaniQuiz | Início" caminho="../resources"/>
+<tag:header_user title="BioQuiz - Início" titlePage="BioQuiz | Início" caminho="../resources"/>
 
 <tag:conteudoInicio />
 <tag:open_coluna tamanho="12"/>

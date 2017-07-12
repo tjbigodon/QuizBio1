@@ -25,9 +25,9 @@
 
 %>
 <%if (usr.getTipo() == 0) {%>
-<tag:header_user_root title="BotaniQuiz - Ranking" titlePage="BotaniQuiz | Ranking" caminho="resources" paramVolta="user/"/>
+<tag:header_user_root title="BioQuiz - Ranking" titlePage="BioQuiz | Ranking" caminho="resources" paramVolta="user/"/>
 <%} else {%>
-<tag:header_admin_root title="BotaniQuiz - Ranking" titlePage="BotaniQuiz | Ranking" caminho="resources"/>
+<tag:header_admin_root title="BioQuiz - Ranking" titlePage="BioQuiz | Ranking" caminho="resources"/>
 <%}%>
 
 <%

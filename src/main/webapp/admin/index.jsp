@@ -19,7 +19,7 @@
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
-<tag:header_admin title="BotaniQuiz - Administração" titlePage="BotaniQuiz | Administração" caminho="../resources"/>
+<tag:header_admin title="BioQuiz - Administração" titlePage="BioQuiz | Administração" caminho="../resources"/>
 
 <tag:conteudoInicio />
 <tag:open_coluna tamanho="12"/>

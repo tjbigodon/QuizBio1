@@ -16,7 +16,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="tag"%>
-<tag:header_inicio title="BotaniQuiz - Login" titlePage="BotaniQuiz | Login" caminho="resources"/>
+<tag:header_inicio title="BioQuiz - Login" titlePage="BioQuiz | Login" caminho="resources"/>
 
 <tag:conteudoInicio />
 <%if (session.getAttribute("erro_login") != null) {

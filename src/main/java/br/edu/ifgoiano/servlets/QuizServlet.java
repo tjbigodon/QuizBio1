@@ -142,7 +142,7 @@ public class QuizServlet extends HttpServlet {
                 contadorPerguntas++;
             }
         }
-        if (contadorPerguntas != 9) {
+        if (contadorPerguntas != 10) {
             Pergunta pgt = new Pergunta();
             PerguntaDao pdao = new PerguntaDao();
             List<Pergunta> perguntas = pdao.getLista();
