@@ -426,7 +426,7 @@
 <div class="col-lg-6">
     <div class="col-lg-12">
         <div class="note note-danger">
-            <h4 class="box-heading"><strong>Ops! Parece que voce ainda jogou este quiz.</strong></h4>
+            <h4 class="box-heading"><strong>Ops! Parece que voce ainda não jogou este quiz.</strong></h4>
             <p>Jogue agora.<br>
                 Conquiste o título do <strong>Hall da Fama</strong>.</p>
         </div>

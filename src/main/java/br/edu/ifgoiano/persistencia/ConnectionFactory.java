@@ -25,7 +25,7 @@ public class ConnectionFactory {
     private final String user = "quiz_bd";
     private final String password = "Snk8TxKkX0jWd4CN";
     private final String driver = "com.mysql.jdbc.Driver";
-    */
+    //*/
     public Connection getConnection() {
         try {
             try {

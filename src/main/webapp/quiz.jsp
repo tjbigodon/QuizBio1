@@ -41,7 +41,13 @@
 <%}%>
 
 <tag:conteudoInicio />
-
+<%if (session.getAttribute("quiz_erro") != null) {
+if (session.getAttribute("quiz_erro").equals("erro")) {%>
+<div id="alert_danger" class="alert alert-danger col-lg-12" role="alert" style="text-align: center">
+    <strong>Escolha uma questão antes de passar para a próxima pergunta</strong>
+    <%session.setAttribute("quiz_erro", null);%>
+</div>
+<%}}%>
 
 <!--Mostra Questão-->
 <div class="col-lg-1"></div>

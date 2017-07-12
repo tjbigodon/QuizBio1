@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import sun.rmi.server.Dispatcher;
 
 /**
  *
@@ -52,35 +51,41 @@ public class QuizServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (request.getParameter("btn") != null && request.getParameter("btn").equals("proximo")) {
-            String sessao = (String) session.getAttribute("NovoQuiz");
-            String[] questoes = sessao.split("_");
-            Pergunta pgt = new Pergunta();
 
-            if (questoes[questoes.length - 1].contains("-") || sessao == null) {
-                response.sendRedirect("QuizServlet");
-            } else {
-                pgt = pega_questão.getPergunta(Integer.parseInt(questoes[questoes.length - 1]));
-            }
-            List<Resposta> resposta = pega_resposta.pesquisarPergunta(Integer.parseInt(questoes[questoes.length - 1]));
-
-            Resposta respostaCerta = pega_resposta.pesquisarPerguntaCerta(Integer.parseInt(questoes[questoes.length - 1]));
-
-            if (request.getParameter("resposta").equals(String.valueOf(respostaCerta.getId()))) {
-                session.setAttribute("NovoQuiz", session.getAttribute("NovoQuiz") + "-C_");
-            } else {
-                session.setAttribute("NovoQuiz", session.getAttribute("NovoQuiz") + "-E_");
-            }
-
-            Pergunta pergunta = sorteiaPergunta(request, response, session);
-
-            if (pergunta == null) {
-                contagemPontos(request, response, session);
-                response.sendRedirect("ranking.jsp");
-            } else {
+            if (request.getParameter("resposta") == null) {                
+                session.setAttribute("quiz_erro", "erro");
                 response.sendRedirect("quiz.jsp");
-            }
+            } else {
+                String sessao = (String) session.getAttribute("NovoQuiz");
+                String[] questoes = sessao.split("_");
+                Pergunta pgt = new Pergunta();
 
+                if (questoes[questoes.length - 1].contains("-") || sessao == null) {
+                    response.sendRedirect("QuizServlet");
+                } else {
+                    pgt = pega_questão.getPergunta(Integer.parseInt(questoes[questoes.length - 1]));
+                }
+                List<Resposta> resposta = pega_resposta.pesquisarPergunta(Integer.parseInt(questoes[questoes.length - 1]));
+
+                Resposta respostaCerta = pega_resposta.pesquisarPerguntaCerta(Integer.parseInt(questoes[questoes.length - 1]));
+
+                if (request.getParameter("resposta").equals(String.valueOf(respostaCerta.getId()))) {
+                    session.setAttribute("NovoQuiz", session.getAttribute("NovoQuiz") + "-C_");
+                } else {
+                    session.setAttribute("NovoQuiz", session.getAttribute("NovoQuiz") + "-E_");
+                }
+
+                Pergunta pergunta = sorteiaPergunta(request, response, session);
+
+                if (pergunta == null) {
+                    contagemPontos(request, response, session);
+                    response.sendRedirect("ranking.jsp");
+                } else {
+                    response.sendRedirect("quiz.jsp");
+                }
+            }
         } else {
+
             if (session.getAttribute("NovoQuiz") == null) {
                 session.setAttribute("NovoQuiz", "");
             }
@@ -129,7 +134,7 @@ public class QuizServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public Pergunta sorteiaPergunta(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    public Pergunta sorteiaPergunta(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
         String sessaoPerguntas = (String) session.getAttribute("NovoQuiz");
 
         int contadorPerguntas = 0;
@@ -153,8 +158,8 @@ public class QuizServlet extends HttpServlet {
 
                 if (idPergunta > perguntas.size()) {
                     idPergunta--;
-                } 
-            }       
+                }
+            }
 
             pgt = pdao.getPergunta(idPergunta);
             String id = String.valueOf(pgt.getId());
